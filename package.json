@@ -1,0 +1,11 @@
+{
+    "name": "tailwindcss-project",
+    "version": "1.0.0",
+    "scripts": {
+        "build": "tailwindcss build src/styles.css -o dist/output.css",
+        "watch": "tailwindcss build src/styles.css -o dist/output.css --watch"
+    },
+    "devDependencies": {
+        "tailwindcss": "^3.0.0"
+    }
+}
