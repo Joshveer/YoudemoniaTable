@@ -6,19 +6,19 @@
     <title>Opportunity Spreadsheet</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white-100 p-4">
+<body class="bg-purple-50 p-4">
     <div class="max-w-7xl mx-auto">
         <!-- Header with logo, centered search bar, and sort buttons -->
-        <div class="flex justify-between items-center mb-8">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8">
             <!-- Logo -->
-            <div class="w-20 h-20">
+            <div class="w-20 h-20 mb-4 md:mb-0">
                 <img src="logo.webp" alt="Logo" class="w-full h-full object-contain">
             </div>
             
             <!-- Centered search bar -->
-            <div class="w-1/2">
+            <div class="w-full md:w-2/3 mb-4 md:mb-0">
                 <div class="relative">
-                    <input type="text" placeholder="Enter Address" class="pl-10 pr-4 py-2 border rounded-full w-full bg-purple-100">
+                    <input type="text" id="searchInput" placeholder="Search by Name, Location, Age Group, or Industry" class="pl-10 pr-4 py-2 border rounded-full w-full bg-white">
                     <svg class="w-5 h-5 text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
@@ -27,79 +27,156 @@
             
             <!-- Sort buttons -->
             <div class="flex">
-                <button class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full mr-2 text-sm">Sort By Industry</button>
-                <button class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Sort By Age Group</button>
+                <button id="sortIndustry" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full mr-2 text-sm">Sort By Industry</button>
+                <button id="sortAge" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Sort By Age Group</button>
             </div>
         </div>
 
         <!-- Spreadsheet table -->
-        <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="bg-white rounded-lg shadow overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-purple-700">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Favorite</th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Opportunity Name</th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Location</th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Date/Time</th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Tags</th>
-                        <th class="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">More Info</th>
+                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Favorite</th>
+                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Opportunity Name</th>
+                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Location</th>
+                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Date/Time</th>
+                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Tags</th>
+                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">More Info</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <button class="text-2xl focus:outline-none" onclick="toggleHeart(this)">❤️</button>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">Community Cleanup</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Central Park</td>
-                        <td class="px-6 py-4 whitespace-nowrap">2024-08-15 09:00 AM</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Environment, Community</td>
-                        <td class="px-6 py-4 whitespace-nowrap">...</td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <button class="text-2xl focus:outline-none" onclick="toggleHeart(this)">🤍</button>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">Food Drive</td>
-                        <td class="px-6 py-4 whitespace-nowrap">City Hall</td>
-                        <td class="px-6 py-4 whitespace-nowrap">2024-09-01 10:00 AM</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Charity, Food</td>
-                        <td class="px-6 py-4 whitespace-nowrap">...</td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <button class="text-2xl focus:outline-none" onclick="toggleHeart(this)">🤍</button>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">Tech Workshop</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Public Library</td>
-                        <td class="px-6 py-4 whitespace-nowrap">2024-08-22 02:00 PM</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Education, Technology</td>
-                        <td class="px-6 py-4 whitespace-nowrap">...</td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <button class="text-2xl focus:outline-none" onclick="toggleHeart(this)">❤️</button>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">Art Exhibition</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Community Center</td>
-                        <td class="px-6 py-4 whitespace-nowrap">2024-09-10 11:00 AM</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Art, Culture</td>
-                        <td class="px-6 py-4 whitespace-nowrap">...</td>
-                    </tr>
-                    <!-- We add more opportunities here -->
+                <tbody id="opportunityTableBody" class="bg-white divide-y divide-gray-200">
+                    <!-- Opportunities will be dynamically added here -->
                 </tbody>
             </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-4 flex justify-between items-center">
+            <button id="prevPage" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Previous</button>
+            <span id="pageInfo">Page 1 of 1</span>
+            <button id="nextPage" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Next</button>
         </div>
     </div>
 
     <script>
+        const opportunities = [
+            { name: "Community Cleanup", location: "New York, NY", datetime: "08/15/2024 09:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
+            { name: "Food Drive", location: "Los Angeles, CA", datetime: "09/01/2024 10:00 AM", tags: ["Charity", "Food"], ageGroup: "Adults", industry: "Non-profit" },
+            { name: "Tech Workshop", location: "Chicago, IL", datetime: "08/22/2024 02:00 PM", tags: ["Education", "Technology"], ageGroup: "Teens", industry: "Technology" },
+            { name: "Art Exhibition", location: "Houston, TX", datetime: "09/10/2024 11:00 AM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts" },
+            { name: "Elderly Care Volunteer", location: "Miami, FL", datetime: "08/30/2024 10:00 AM", tags: ["Healthcare", "Community"], ageGroup: "Adults", industry: "Healthcare" },
+            { name: "Beach Cleanup", location: "San Diego, CA", datetime: "09/05/2024 08:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
+            { name: "Coding Bootcamp", location: "Seattle, WA", datetime: "09/15/2024 09:00 AM", tags: ["Education", "Technology"], ageGroup: "Young Adults", industry: "Technology" },
+            { name: "Homeless Shelter Support", location: "Boston, MA", datetime: "08/25/2024 07:00 PM", tags: ["Charity", "Community"], ageGroup: "Adults", industry: "Non-profit" },
+            { name: "Wildlife Conservation", location: "Denver, CO", datetime: "09/20/2024 06:00 AM", tags: ["Environment", "Animal Welfare"], ageGroup: "Adults", industry: "Environmental Services" },
+            { name: "Youth Mentorship Program", location: "Atlanta, GA", datetime: "09/08/2024 03:00 PM", tags: ["Education", "Youth"], ageGroup: "Teens", industry: "Education" },
+            { name: "Local Theater Production", location: "Portland, OR", datetime: "09/12/2024 07:00 PM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts" },
+            { name: "Hunger Relief Initiative", location: "Phoenix, AZ", datetime: "08/28/2024 11:00 AM", tags: ["Charity", "Food"], ageGroup: "Adults", industry: "Non-profit" },
+            { name: "Urban Gardening Project", location: "Austin, TX", datetime: "09/03/2024 08:30 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Agriculture" },
+            { name: "Literacy Program", location: "Washington, DC", datetime: "09/18/2024 04:00 PM", tags: ["Education", "Literacy"], ageGroup: "Children", industry: "Education" },
+            { name: "Pet Adoption Fair", location: "San Francisco, CA", datetime: "09/22/2024 10:00 AM", tags: ["Animal Welfare", "Community"], ageGroup: "All Ages", industry: "Animal Services" }
+        ];
+
+        const itemsPerPage = 10;
+        let currentPage = 1;
+        let filteredOpportunities = [...opportunities];
+
         function toggleHeart(button) {
-            if (button.textContent === '❤️') {
-                button.textContent = '🤍';
-            } else {
-                button.textContent = '❤️';
-            }
+            button.textContent = button.textContent === '❤️' ? '🤍' : '❤️';
         }
+
+        function renderOpportunities(page) {
+            const tableBody = document.getElementById('opportunityTableBody');
+            tableBody.innerHTML = '';
+
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageOpportunities = filteredOpportunities.slice(start, end);
+
+            pageOpportunities.forEach(opp => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-purple-50 transition-colors duration-150 ease-in-out';
+                row.innerHTML = `
+                    <td class="px-4 py-4 whitespace-nowrap">
+                        <button class="text-xl focus:outline-none" onclick="toggleHeart(this)">🤍</button>
+                    </td>
+                    <td class="px-4 py-4 whitespace-nowrap">${opp.name}</td>
+                    <td class="px-4 py-4 whitespace-nowrap">${opp.location}</td>
+                    <td class="px-4 py-4 whitespace-nowrap">${opp.datetime}</td>
+                    <td class="px-4 py-4">
+                        <div class="flex flex-wrap gap-1">
+                            ${opp.tags.map(tag => `<span class="inline-block bg-purple-200 rounded-full px-2 py-1 text-xs font-semibold text-purple-700">${tag}</span>`).join('')}
+                            <span class="inline-block bg-blue-200 rounded-full px-2 py-1 text-xs font-semibold text-blue-700">${opp.ageGroup}</span>
+                            <span class="inline-block bg-green-200 rounded-full px-2 py-1 text-xs font-semibold text-green-700">${opp.industry}</span>
+                        </div>
+                    </td>
+                    <td class="px-4 py-4 whitespace-nowrap">
+                        <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-1 px-2 rounded text-xs">
+                            View Details
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            updatePagination();
+        }
+
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredOpportunities.length / itemsPerPage);
+            document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage === totalPages;
+        }
+
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderOpportunities(currentPage);
+            }
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            const totalPages = Math.ceil(filteredOpportunities.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderOpportunities(currentPage);
+            }
+        });
+
+        // Add event listener for search input
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            filteredOpportunities = opportunities.filter(opp => 
+                opp.name.toLowerCase().includes(searchTerm) || 
+                opp.location.toLowerCase().includes(searchTerm) ||
+                opp.ageGroup.toLowerCase().includes(searchTerm) ||
+                opp.industry.toLowerCase().includes(searchTerm)
+            );
+            currentPage = 1;
+            renderOpportunities(currentPage);
+        });
+
+        // Sort functions
+        function sortByIndustry() {
+            filteredOpportunities.sort((a, b) => a.industry.localeCompare(b.industry));
+            currentPage = 1;
+            renderOpportunities(currentPage);
+        }
+
+        function sortByAgeGroup() {
+            const ageOrder = ["Children", "Teens", "Young Adults", "Adults", "All Ages"];
+            filteredOpportunities.sort((a, b) => ageOrder.indexOf(a.ageGroup) - ageOrder.indexOf(b.ageGroup));
+            currentPage = 1;
+            renderOpportunities(currentPage);
+        }
+
+        document.getElementById('sortIndustry').addEventListener('click', sortByIndustry);
+        document.getElementById('sortAge').addEventListener('click', sortByAgeGroup);
+
+        // Initial render
+        renderOpportunities(currentPage);
     </script>
 </body>
 </html>
