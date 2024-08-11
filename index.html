@@ -8,7 +8,7 @@
 </head>
 <body class="bg-purple-50 p-4">
     <div class="max-w-7xl mx-auto">
-        <!-- Header with logo, centered search bar, and sort buttons -->
+        <!-- Header with logo, centered search bar, and sort dropdown -->
         <div class="flex flex-col md:flex-row justify-between items-center mb-8">
             <!-- Logo -->
             <div class="w-20 h-20 mb-4 md:mb-0">
@@ -25,11 +25,26 @@
                 </div>
             </div>
             
-            <!-- Sort buttons -->
+            <!-- Sort dropdown -->
             <div class="flex">
-                <button id="sortIndustry" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full mr-2 text-sm">Sort By Industry</button>
-                <button id="sortAge" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Sort By Age Group</button>
+                <select id="sortDropdown" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm appearance-none pr-8 cursor-pointer">
+                    <option value="">Sort By</option>
+                    <option value="industry">Industry</option>
+                    <option value="ageGroup">Age Group</option>
+                </select>
+                <div class="relative right-6 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
             </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-4">
+            <button id="allOpportunities" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full mr-2 text-sm">All Opportunities</button>
+            <button id="favorites" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full mr-2 text-sm">Favorites</button>
+            <button id="exportFavorites" class="bg-green-700 text-white font-bold px-4 py-2 rounded-full text-sm">Export Favorites</button>
         </div>
 
         <!-- Spreadsheet table -->
@@ -39,6 +54,7 @@
                     <tr>
                         <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Favorite</th>
                         <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Opportunity Name</th>
+                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Organization</th>
                         <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Location</th>
                         <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Date/Time</th>
                         <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Tags</th>
@@ -59,31 +75,49 @@
         </div>
     </div>
 
+    <!-- Modal for opportunity details -->
+    <div id="detailsModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div id="modalContent"></div>
+            <div class="text-center mt-4">
+                <button id="closeModal" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const opportunities = [
-            { name: "Community Cleanup", location: "New York, NY", datetime: "08/15/2024 09:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
-            { name: "Food Drive", location: "Los Angeles, CA", datetime: "09/01/2024 10:00 AM", tags: ["Charity", "Food"], ageGroup: "Adults", industry: "Non-profit" },
-            { name: "Tech Workshop", location: "Chicago, IL", datetime: "08/22/2024 02:00 PM", tags: ["Education", "Technology"], ageGroup: "Teens", industry: "Technology" },
-            { name: "Art Exhibition", location: "Houston, TX", datetime: "09/10/2024 11:00 AM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts" },
-            { name: "Elderly Care Volunteer", location: "Miami, FL", datetime: "08/30/2024 10:00 AM", tags: ["Healthcare", "Community"], ageGroup: "Adults", industry: "Healthcare" },
-            { name: "Beach Cleanup", location: "San Diego, CA", datetime: "09/05/2024 08:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
-            { name: "Coding Bootcamp", location: "Seattle, WA", datetime: "09/15/2024 09:00 AM", tags: ["Education", "Technology"], ageGroup: "Young Adults", industry: "Technology" },
-            { name: "Homeless Shelter Support", location: "Boston, MA", datetime: "08/25/2024 07:00 PM", tags: ["Charity", "Community"], ageGroup: "Adults", industry: "Non-profit" },
-            { name: "Wildlife Conservation", location: "Denver, CO", datetime: "09/20/2024 06:00 AM", tags: ["Environment", "Animal Welfare"], ageGroup: "Adults", industry: "Environmental Services" },
-            { name: "Youth Mentorship Program", location: "Atlanta, GA", datetime: "09/08/2024 03:00 PM", tags: ["Education", "Youth"], ageGroup: "Teens", industry: "Education" },
-            { name: "Local Theater Production", location: "Portland, OR", datetime: "09/12/2024 07:00 PM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts" },
-            { name: "Hunger Relief Initiative", location: "Phoenix, AZ", datetime: "08/28/2024 11:00 AM", tags: ["Charity", "Food"], ageGroup: "Adults", industry: "Non-profit" },
-            { name: "Urban Gardening Project", location: "Austin, TX", datetime: "09/03/2024 08:30 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Agriculture" },
-            { name: "Literacy Program", location: "Washington, DC", datetime: "09/18/2024 04:00 PM", tags: ["Education", "Literacy"], ageGroup: "Children", industry: "Education" },
-            { name: "Pet Adoption Fair", location: "San Francisco, CA", datetime: "09/22/2024 10:00 AM", tags: ["Animal Welfare", "Community"], ageGroup: "All Ages", industry: "Animal Services" }
+            { name: "Community Cleanup", organization: "Green Earth", location: "New York, NY", datetime: "08/15/2024 09:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
+            { name: "Food Drive", organization: "Feeding America", location: "Los Angeles, CA", datetime: "09/01/2024 10:00 AM", tags: ["Charity", "Food"], ageGroup: "Adults", industry: "Non-profit" },
+            { name: "Tech Workshop", organization: "Code for Good", location: "Chicago, IL", datetime: "08/22/2024 02:00 PM", tags: ["Education", "Technology"], ageGroup: "Teens", industry: "Technology" },
+            { name: "Art Exhibition", organization: "City Museum", location: "Houston, TX", datetime: "09/10/2024 11:00 AM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts" },
+            { name: "Elderly Care Volunteer", organization: "SilverCare", location: "Miami, FL", datetime: "08/30/2024 10:00 AM", tags: ["Healthcare", "Community"], ageGroup: "Adults", industry: "Healthcare" },
+            { name: "Beach Cleanup", organization: "Ocean Guardians", location: "San Diego, CA", datetime: "09/05/2024 08:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
+            { name: "Coding Bootcamp", organization: "Tech Futures", location: "Seattle, WA", datetime: "09/15/2024 09:00 AM", tags: ["Education", "Technology"], ageGroup: "Young Adults", industry: "Technology" },
+            { name: "Homeless Shelter Support", organization: "Urban Hope", location: "Boston, MA", datetime: "08/25/2024 07:00 PM", tags: ["Charity", "Community"], ageGroup: "Adults", industry: "Non-profit" },
+            { name: "Wildlife Conservation", organization: "NatureFirst", location: "Denver, CO", datetime: "09/20/2024 06:00 AM", tags: ["Environment", "Animal Welfare"], ageGroup: "Adults", industry: "Environmental Services" },
+            { name: "Youth Mentorship Program", organization: "Future Leaders", location: "Atlanta, GA", datetime: "09/08/2024 03:00 PM", tags: ["Education", "Youth"], ageGroup: "Teens", industry: "Education" },
+            { name: "Local Theater Production", organization: "Community Players", location: "Portland, OR", datetime: "09/12/2024 07:00 PM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts" },
+            { name: "Hunger Relief Initiative", organization: "Food for All", location: "Phoenix, AZ", datetime: "08/28/2024 11:00 AM", tags: ["Charity", "Food"], ageGroup: "Adults", industry: "Non-profit" },
+            { name: "Urban Gardening Project", organization: "Green Cities", location: "Austin, TX", datetime: "09/03/2024 08:30 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Agriculture" },
+            { name: "Literacy Program", organization: "Books for Life", location: "Washington, DC", datetime: "09/18/2024 04:00 PM", tags: ["Education", "Literacy"], ageGroup: "Children", industry: "Education" },
+            { name: "Pet Adoption Fair", organization: "Happy Paws", location: "San Francisco, CA", datetime: "09/22/2024 10:00 AM", tags: ["Animal Welfare", "Community"], ageGroup: "All Ages", industry: "Animal Services" }
         ];
 
         const itemsPerPage = 10;
         let currentPage = 1;
         let filteredOpportunities = [...opportunities];
+        let favoriteOpportunities = [];
 
-        function toggleHeart(button) {
-            button.textContent = button.textContent === '❤️' ? '🤍' : '❤️';
+        function toggleHeart(button, opp) {
+            const isFavorite = button.textContent === '❤️';
+            button.textContent = isFavorite ? '🤍' : '❤️';
+            
+            if (isFavorite) {
+                favoriteOpportunities = favoriteOpportunities.filter(fav => fav.name !== opp.name);
+            } else {
+                favoriteOpportunities.push(opp);
+            }
         }
 
         function renderOpportunities(page) {
@@ -99,9 +133,12 @@
                 row.className = 'hover:bg-purple-50 transition-colors duration-150 ease-in-out';
                 row.innerHTML = `
                     <td class="px-4 py-4 whitespace-nowrap">
-                        <button class="text-xl focus:outline-none" onclick="toggleHeart(this)">🤍</button>
+                        <button class="text-xl focus:outline-none text-red-500" onclick='toggleHeart(this, ${JSON.stringify(opp)})'>
+                            ${favoriteOpportunities.some(fav => fav.name === opp.name) ? '❤️' : '🤍'}
+                        </button>
                     </td>
                     <td class="px-4 py-4 whitespace-nowrap">${opp.name}</td>
+                    <td class="px-4 py-4 whitespace-nowrap">${opp.organization}</td>
                     <td class="px-4 py-4 whitespace-nowrap">${opp.location}</td>
                     <td class="px-4 py-4 whitespace-nowrap">${opp.datetime}</td>
                     <td class="px-4 py-4">
@@ -112,7 +149,7 @@
                         </div>
                     </td>
                     <td class="px-4 py-4 whitespace-nowrap">
-                        <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-1 px-2 rounded text-xs">
+                        <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-1 px-2 rounded text-xs" data-opportunity='${JSON.stringify(opp)}'>
                             View Details
                         </button>
                     </td>
@@ -145,35 +182,83 @@
             }
         });
 
-        // Add event listener for search input
         document.getElementById('searchInput').addEventListener('input', function() {
             const searchTerm = this.value.toLowerCase();
             filteredOpportunities = opportunities.filter(opp => 
                 opp.name.toLowerCase().includes(searchTerm) || 
                 opp.location.toLowerCase().includes(searchTerm) ||
                 opp.ageGroup.toLowerCase().includes(searchTerm) ||
-                opp.industry.toLowerCase().includes(searchTerm)
+                opp.industry.toLowerCase().includes(searchTerm) ||
+                opp.organization.toLowerCase().includes(searchTerm)
             );
             currentPage = 1;
             renderOpportunities(currentPage);
         });
 
-        // Sort functions
-        function sortByIndustry() {
-            filteredOpportunities.sort((a, b) => a.industry.localeCompare(b.industry));
+        document.getElementById('sortDropdown').addEventListener('change', function() {
+            const sortBy = this.value;
+            if (sortBy === 'industry') {
+                filteredOpportunities.sort((a, b) => a.industry.localeCompare(b.industry));
+            } else if (sortBy === 'ageGroup') {
+                const ageOrder = ["Children", "Teens", "Young Adults", "Adults", "All Ages"];
+                filteredOpportunities.sort((a, b) => ageOrder.indexOf(a.ageGroup) - ageOrder.indexOf(b.ageGroup));
+            }
             currentPage = 1;
             renderOpportunities(currentPage);
-        }
+        });
 
-        function sortByAgeGroup() {
-            const ageOrder = ["Children", "Teens", "Young Adults", "Adults", "All Ages"];
-            filteredOpportunities.sort((a, b) => ageOrder.indexOf(a.ageGroup) - ageOrder.indexOf(b.ageGroup));
+        document.getElementById('allOpportunities').addEventListener('click', function() {
+            filteredOpportunities = [...opportunities];
             currentPage = 1;
             renderOpportunities(currentPage);
-        }
+        });
 
-        document.getElementById('sortIndustry').addEventListener('click', sortByIndustry);
-        document.getElementById('sortAge').addEventListener('click', sortByAgeGroup);
+        document.getElementById('favorites').addEventListener('click', function() {
+            filteredOpportunities = [...favoriteOpportunities];
+            currentPage = 1;
+            renderOpportunities(currentPage);
+        });
+
+        document.getElementById('exportFavorites').addEventListener('click', function() {
+            const csvContent = "data:text/csv;charset=utf-8," 
+                + "Name,Organization,Location,Date/Time,Age Group,Industry,Tags\n"
+                + favoriteOpportunities.map(opp => {
+                    return `"${opp.name}","${opp.organization}","${opp.location}","${opp.datetime}","${opp.ageGroup}","${opp.industry}","${opp.tags.join(', ')}"`;
+                }).join("\n");
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "favorite_opportunities.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.matches('button[data-opportunity]')) {
+                const opp = JSON.parse(e.target.getAttribute('data-opportunity'));
+                showDetails(opp);
+            }
+        });
+
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('detailsModal').classList.add('hidden');
+        });
+
+        function showDetails(opp) {
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <h2 class="text-xl font-bold mb-2">${opp.name}</h2>
+                <p><strong>Organization:</strong> ${opp.organization}</p>
+                <p><strong>Location:</strong> ${opp.location}</p>
+                <p><strong>Date/Time:</strong> ${opp.datetime}</p>
+                <p><strong>Age Group:</strong> ${opp.ageGroup}</p>
+                <p><strong>Industry:</strong> ${opp.industry}</p>
+                <p><strong>Tags:</strong> ${opp.tags.join(', ')}</p>
+            `;
+            document.getElementById('detailsModal').classList.remove('hidden');
+        }
 
         // Initial render
         renderOpportunities(currentPage);
