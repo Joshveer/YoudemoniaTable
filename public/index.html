@@ -8,43 +8,64 @@
 </head>
 <body class="bg-purple-50 p-4">
     <div class="max-w-7xl mx-auto">
-        <!-- Header with logo, centered search bar, and sort dropdown -->
-        <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+        <!-- Header with logo -->
+        <div class="flex justify-center mb-8">
             <!-- Logo -->
-            <div class="w-20 h-20 mb-4 md:mb-0">
+            <div class="w-20 h-20">
                 <img src="logo.webp" alt="Logo" class="w-full h-full object-contain">
             </div>
-            
-            <!-- Centered search bar -->
-            <div class="w-full md:w-2/3 mb-4 md:mb-0">
-                <div class="relative">
-                    <input type="text" id="searchInput" placeholder="Search by Name, Location, Age Group, or Industry" class="pl-10 pr-4 py-2 border rounded-full w-full bg-white">
-                    <svg class="w-5 h-5 text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </div>
+        </div>
+        
+        <!-- Centered search bar -->
+        <div class="flex justify-center mb-8">
+            <div class="w-full md:w-2/3 relative">
+                <input type="text" id="searchInput" placeholder="Search by Name, Location, Age Group, or Industry" class="pl-10 pr-4 py-2 border rounded-full w-full bg-white">
+                <svg class="w-5 h-5 text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
             </div>
+        </div>
+    
+        <!-- Buttons and Sort dropdowns -->
+        <div class="flex flex-wrap justify-center items-center gap-5 mb-8">
+            <button id="allOpportunities" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">All Opportunities</button>
+            <button id="favorites" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Favorites</button>
+            <button id="exportFavorites" class="bg-green-700 text-white font-bold px-4 py-2 rounded-full text-sm">Export Favorites</button>
             
-            <!-- Sort dropdown -->
-            <div class="flex">
-                <select id="sortDropdown" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm appearance-none pr-8 cursor-pointer">
-                    <option value="">Sort By</option>
-                    <option value="industry">Industry</option>
-                    <option value="ageGroup">Age Group</option>
+            <div class="relative">
+                <select id="industryDropdown" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm appearance-none pr-8 cursor-pointer">
+                    <option value="">Sort by Industry</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Education">Education</option>
+                    <option value="Environmental">Environmental</option>
+                    <option value="Non-profit">Non-profit</option>
+                    <option value="Arts">Arts</option>
+                    <option value="Social Services">Social Services</option>
                 </select>
-                <div class="relative right-6 top-7 transform -translate-y-1/2 pointer-events-none">
+                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                     <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
             </div>
-        </div>
-
-        <!-- Tabs -->
-        <div class="mb-4">
-            <button id="allOpportunities" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full mr-2 text-sm">All Opportunities</button>
-            <button id="favorites" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full mr-2 text-sm">Favorites</button>
-            <button id="exportFavorites" class="bg-green-700 text-white font-bold px-4 py-2 rounded-full text-sm">Export Favorites</button>
+            
+            <div class="relative">
+                <select id="ageGroupDropdown" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm appearance-none pr-8 cursor-pointer">
+                    <option value="">Sort by Age Group</option>
+                    <option value="Elementary">Elementary School</option>
+                    <option value="Middle School">Middle School</option>
+                    <option value="High School">High School</option>
+                    <option value="College">College</option>
+                    <option value="18+">18+ Only</option>
+                    <option value="All Ages">All Ages</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+            </div>
         </div>
 
         <!-- Spreadsheet table -->
@@ -89,19 +110,19 @@
         const opportunities = [
             { name: "Community Cleanup", organization: "Green Earth", location: "New York, NY", datetime: "08/15/2024 09:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
             { name: "Food Drive", organization: "Feeding America", location: "Los Angeles, CA", datetime: "09/01/2024 10:00 AM", tags: ["Charity", "Food"], ageGroup: "Adults", industry: "Non-profit" },
-            { name: "Tech Workshop", organization: "Code for Good", location: "Chicago, IL", datetime: "08/22/2024 02:00 PM", tags: ["Education", "Technology"], ageGroup: "Teens", industry: "Technology" },
+            { name: "Tech Workshop", organization: "Code for Good", location: "Chicago, IL", datetime: "08/22/2024 02:00 PM", tags: ["Education", "Technology"], ageGroup: "High School", industry: "Technology" },
             { name: "Art Exhibition", organization: "City Museum", location: "Houston, TX", datetime: "09/10/2024 11:00 AM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts" },
-            { name: "Elderly Care Volunteer", organization: "SilverCare", location: "Miami, FL", datetime: "08/30/2024 10:00 AM", tags: ["Healthcare", "Community"], ageGroup: "Adults", industry: "Healthcare" },
+            { name: "Elderly Care Volunteer", organization: "SilverCare", location: "Miami, FL", datetime: "08/30/2024 10:00 AM", tags: ["Healthcare", "Community"], ageGroup: "18+", industry: "Healthcare" },
             { name: "Beach Cleanup", organization: "Ocean Guardians", location: "San Diego, CA", datetime: "09/05/2024 08:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
-            { name: "Coding Bootcamp", organization: "Tech Futures", location: "Seattle, WA", datetime: "09/15/2024 09:00 AM", tags: ["Education", "Technology"], ageGroup: "Young Adults", industry: "Technology" },
-            { name: "Homeless Shelter Support", organization: "Urban Hope", location: "Boston, MA", datetime: "08/25/2024 07:00 PM", tags: ["Charity", "Community"], ageGroup: "Adults", industry: "Non-profit" },
-            { name: "Wildlife Conservation", organization: "NatureFirst", location: "Denver, CO", datetime: "09/20/2024 06:00 AM", tags: ["Environment", "Animal Welfare"], ageGroup: "Adults", industry: "Environmental Services" },
-            { name: "Youth Mentorship Program", organization: "Future Leaders", location: "Atlanta, GA", datetime: "09/08/2024 03:00 PM", tags: ["Education", "Youth"], ageGroup: "Teens", industry: "Education" },
+            { name: "Coding Bootcamp", organization: "Tech Futures", location: "Seattle, WA", datetime: "09/15/2024 09:00 AM", tags: ["Education", "Technology"], ageGroup: "College", industry: "Technology" },
+            { name: "Homeless Shelter Support", organization: "Urban Hope", location: "Boston, MA", datetime: "08/25/2024 07:00 PM", tags: ["Charity", "Community"], ageGroup: "18+", industry: "Non-profit" },
+            { name: "Wildlife Conservation", organization: "NatureFirst", location: "Denver, CO", datetime: "09/20/2024 06:00 AM", tags: ["Environment", "Animal Welfare"], ageGroup: "18+", industry: "Environmental Services" },
+            { name: "Youth Mentorship Program", organization: "Future Leaders", location: "Atlanta, GA", datetime: "09/08/2024 03:00 PM", tags: ["Education", "Youth"], ageGroup: "High School", industry: "Education" },
             { name: "Local Theater Production", organization: "Community Players", location: "Portland, OR", datetime: "09/12/2024 07:00 PM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts" },
-            { name: "Hunger Relief Initiative", organization: "Food for All", location: "Phoenix, AZ", datetime: "08/28/2024 11:00 AM", tags: ["Charity", "Food"], ageGroup: "Adults", industry: "Non-profit" },
-            { name: "Urban Gardening Project", organization: "Green Cities", location: "Austin, TX", datetime: "09/03/2024 08:30 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Agriculture" },
-            { name: "Literacy Program", organization: "Books for Life", location: "Washington, DC", datetime: "09/18/2024 04:00 PM", tags: ["Education", "Literacy"], ageGroup: "Children", industry: "Education" },
-            { name: "Pet Adoption Fair", organization: "Happy Paws", location: "San Francisco, CA", datetime: "09/22/2024 10:00 AM", tags: ["Animal Welfare", "Community"], ageGroup: "All Ages", industry: "Animal Services" }
+            { name: "Hunger Relief Initiative", organization: "Food for All", location: "Phoenix, AZ", datetime: "08/28/2024 11:00 AM", tags: ["Charity", "Food"], ageGroup: "18+", industry: "Non-profit" },
+            { name: "Urban Gardening Project", organization: "Green Cities", location: "Austin, TX", datetime: "09/03/2024 08:30 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
+            { name: "Literacy Program", organization: "Books for Life", location: "Washington, DC", datetime: "09/18/2024 04:00 PM", tags: ["Education", "Literacy"], ageGroup: "Elementary", industry: "Education" },
+            { name: "Pet Adoption Fair", organization: "Happy Paws", location: "San Francisco, CA", datetime: "09/22/2024 10:00 AM", tags: ["Animal Welfare", "Community"], ageGroup: "All Ages", industry: "Social Services" }
         ];
 
         const itemsPerPage = 10;
@@ -195,13 +216,23 @@
             renderOpportunities(currentPage);
         });
 
-        document.getElementById('sortDropdown').addEventListener('change', function() {
-            const sortBy = this.value;
-            if (sortBy === 'industry') {
-                filteredOpportunities.sort((a, b) => a.industry.localeCompare(b.industry));
-            } else if (sortBy === 'ageGroup') {
-                const ageOrder = ["Children", "Teens", "Young Adults", "Adults", "All Ages"];
-                filteredOpportunities.sort((a, b) => ageOrder.indexOf(a.ageGroup) - ageOrder.indexOf(b.ageGroup));
+        document.getElementById('industryDropdown').addEventListener('change', function() {
+            const selectedIndustry = this.value;
+            if (selectedIndustry) {
+                filteredOpportunities = opportunities.filter(opp => opp.industry === selectedIndustry);
+            } else {
+                filteredOpportunities = [...opportunities];
+            }
+            currentPage = 1;
+            renderOpportunities(currentPage);
+        });
+
+        document.getElementById('ageGroupDropdown').addEventListener('change', function() {
+            const selectedAgeGroup = this.value;
+            if (selectedAgeGroup) {
+                filteredOpportunities = opportunities.filter(opp => opp.ageGroup === selectedAgeGroup);
+            } else {
+                filteredOpportunities = [...opportunities];
             }
             currentPage = 1;
             renderOpportunities(currentPage);
