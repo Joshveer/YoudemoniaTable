@@ -8,64 +8,57 @@
 </head>
 <body class="bg-purple-50 p-4">
     <div class="max-w-7xl mx-auto">
-        <!-- Header with logo -->
-        <div class="flex justify-center mb-8">
+        <!-- Header with logo, search bar, and dropdowns -->
+        <div class="flex justify-between items-center mb-8">
             <!-- Logo -->
-            <div class="w-20 h-20">
+            <div class="w-20 h-20 flex-shrink-0">
                 <img src="logo.webp" alt="Logo" class="w-full h-full object-contain">
             </div>
-        </div>
-        
-        <!-- Centered search bar -->
-        <div class="flex justify-center mb-8">
-            <div class="w-full md:w-2/3 relative">
-                <input type="text" id="searchInput" placeholder="Search by Name, Location, Age Group, or Industry" class="pl-10 pr-4 py-2 border rounded-full w-full bg-white">
-                <svg class="w-5 h-5 text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
+
+            <!-- Centered search bar -->
+            <div class="flex-1 mx-4">
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="Search by Name, Location, Age Group, or Industry" class="pl-10 pr-4 py-2 border rounded-full w-full bg-white">
+                    <svg class="w-5 h-5 text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Dropdowns for Industry and Age Group -->
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <button id="industryButton" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Select Industry</button>
+                    <div id="industryDropdown" class="absolute bg-white shadow-lg rounded mt-2 w-48 hidden">
+                        <label class="block px-4 py-2"><input type="checkbox" value="Technology" class="industryCheckbox mr-2">Technology</label>
+                        <label class="block px-4 py-2"><input type="checkbox" value="Healthcare" class="industryCheckbox mr-2">Healthcare</label>
+                        <label class="block px-4 py-2"><input type="checkbox" value="Education" class="industryCheckbox mr-2">Education</label>
+                        <label class="block px-4 py-2"><input type="checkbox" value="Environmental" class="industryCheckbox mr-2">Environmental</label>
+                        <label class="block px-4 py-2"><input type="checkbox" value="Non-profit" class="industryCheckbox mr-2">Non-profit</label>
+                        <label class="block px-4 py-2"><input type="checkbox" value="Arts" class="industryCheckbox mr-2">Arts</label>
+                        <label class="block px-4 py-2"><input type="checkbox" value="Social Services" class="industryCheckbox mr-2">Social Services</label>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <button id="ageGroupButton" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Select Age Group</button>
+                    <div id="ageGroupDropdown" class="absolute bg-white shadow-lg rounded mt-2 w-48 hidden">
+                        <label class="block px-4 py-2"><input type="checkbox" value="Elementary" class="ageGroupCheckbox mr-2">Elementary School</label>
+                        <label class="block px-4 py-2"><input type="checkbox" value="Middle School" class="ageGroupCheckbox mr-2">Middle School</label>
+                        <label class="block px-4 py-2"><input type="checkbox" value="High School" class="ageGroupCheckbox mr-2">High School</label>
+                        <label class="block px-4 py-2"><input type="checkbox" value="College" class="ageGroupCheckbox mr-2">College</label>
+                        <label class="block px-4 py-2"><input type="checkbox" value="18+" class="ageGroupCheckbox mr-2">18+ Only</label>
+                        <label class="block px-4 py-2"><input type="checkbox" value="All Ages" class="ageGroupCheckbox mr-2">All Ages</label>
+                    </div>
+                </div>
             </div>
         </div>
-    
-        <!-- Buttons and Sort dropdowns -->
-        <div class="flex flex-wrap justify-center items-center gap-5 mb-8">
+
+        <!-- Buttons for all opportunities, favorites, and export favorites -->
+        <div class="flex justify-center items-center space-x-8 mb-8">
             <button id="allOpportunities" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">All Opportunities</button>
             <button id="favorites" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Favorites</button>
             <button id="exportFavorites" class="bg-green-700 text-white font-bold px-4 py-2 rounded-full text-sm">Export Favorites</button>
-            
-            <div class="relative">
-                <select id="industryDropdown" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm appearance-none pr-8 cursor-pointer">
-                    <option value="">Sort by Industry</option>
-                    <option value="Technology">Technology</option>
-                    <option value="Healthcare">Healthcare</option>
-                    <option value="Education">Education</option>
-                    <option value="Environmental">Environmental</option>
-                    <option value="Non-profit">Non-profit</option>
-                    <option value="Arts">Arts</option>
-                    <option value="Social Services">Social Services</option>
-                </select>
-                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </div>
-            </div>
-            
-            <div class="relative">
-                <select id="ageGroupDropdown" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm appearance-none pr-8 cursor-pointer">
-                    <option value="">Sort by Age Group</option>
-                    <option value="Elementary">Elementary School</option>
-                    <option value="Middle School">Middle School</option>
-                    <option value="High School">High School</option>
-                    <option value="College">College</option>
-                    <option value="18+">18+ Only</option>
-                    <option value="All Ages">All Ages</option>
-                </select>
-                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </div>
-            </div>
         </div>
 
         <!-- Spreadsheet table -->
@@ -91,7 +84,7 @@
         <!-- Pagination -->
         <div class="mt-4 flex justify-between items-center">
             <button id="prevPage" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Previous</button>
-            <span id="pageInfo">Page 1 of 1</span>
+            <span id="pageInfo">Page 1 of 2</span>
             <button id="nextPage" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Next</button>
         </div>
     </div>
@@ -109,84 +102,111 @@
     <script>
         const opportunities = [
             { name: "Community Cleanup", organization: "Green Earth", location: "New York, NY", datetime: "08/15/2024 09:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
-            { name: "Food Drive", organization: "Feeding America", location: "Los Angeles, CA", datetime: "09/01/2024 10:00 AM", tags: ["Charity", "Food"], ageGroup: "Adults", industry: "Non-profit" },
+            { name: "Food Drive", organization: "Feeding America", location: "Los Angeles, CA", datetime: "09/01/2024 10:00 AM", tags: ["Charity", "Food"], ageGroup: "18+", industry: "Non-profit" },
             { name: "Tech Workshop", organization: "Code for Good", location: "Chicago, IL", datetime: "08/22/2024 02:00 PM", tags: ["Education", "Technology"], ageGroup: "High School", industry: "Technology" },
             { name: "Art Exhibition", organization: "City Museum", location: "Houston, TX", datetime: "09/10/2024 11:00 AM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts" },
-            { name: "Elderly Care Volunteer", organization: "SilverCare", location: "Miami, FL", datetime: "08/30/2024 10:00 AM", tags: ["Healthcare", "Community"], ageGroup: "18+", industry: "Healthcare" },
-            { name: "Beach Cleanup", organization: "Ocean Guardians", location: "San Diego, CA", datetime: "09/05/2024 08:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
-            { name: "Coding Bootcamp", organization: "Tech Futures", location: "Seattle, WA", datetime: "09/15/2024 09:00 AM", tags: ["Education", "Technology"], ageGroup: "College", industry: "Technology" },
-            { name: "Homeless Shelter Support", organization: "Urban Hope", location: "Boston, MA", datetime: "08/25/2024 07:00 PM", tags: ["Charity", "Community"], ageGroup: "18+", industry: "Non-profit" },
-            { name: "Wildlife Conservation", organization: "NatureFirst", location: "Denver, CO", datetime: "09/20/2024 06:00 AM", tags: ["Environment", "Animal Welfare"], ageGroup: "18+", industry: "Environmental Services" },
-            { name: "Youth Mentorship Program", organization: "Future Leaders", location: "Atlanta, GA", datetime: "09/08/2024 03:00 PM", tags: ["Education", "Youth"], ageGroup: "High School", industry: "Education" },
-            { name: "Local Theater Production", organization: "Community Players", location: "Portland, OR", datetime: "09/12/2024 07:00 PM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts" },
-            { name: "Hunger Relief Initiative", organization: "Food for All", location: "Phoenix, AZ", datetime: "08/28/2024 11:00 AM", tags: ["Charity", "Food"], ageGroup: "18+", industry: "Non-profit" },
-            { name: "Urban Gardening Project", organization: "Green Cities", location: "Austin, TX", datetime: "09/03/2024 08:30 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
-            { name: "Literacy Program", organization: "Books for Life", location: "Washington, DC", datetime: "09/18/2024 04:00 PM", tags: ["Education", "Literacy"], ageGroup: "Elementary", industry: "Education" },
-            { name: "Pet Adoption Fair", organization: "Happy Paws", location: "San Francisco, CA", datetime: "09/22/2024 10:00 AM", tags: ["Animal Welfare", "Community"], ageGroup: "All Ages", industry: "Social Services" }
+            { name: "Elderly Care Volunteer", organization: "SilverCare", location: "Miami, FL", datetime: "08/30/2024 10:00 AM", tags: ["Healthcare", "Volunteering"], ageGroup: "18+", industry: "Healthcare" },
+            { name: "Environmental Workshop", organization: "EcoSave", location: "Denver, CO", datetime: "09/05/2024 01:00 PM", tags: ["Environment", "Community"], ageGroup: "College", industry: "Environmental" },
+            // Add more opportunities to make 30 in total
+            { name: "STEM Camp", organization: "Future Engineers", location: "Seattle, WA", datetime: "09/12/2024 08:00 AM", tags: ["Education", "STEM"], ageGroup: "Middle School", industry: "Education" },
+            { name: "Blood Donation", organization: "Red Cross", location: "San Francisco, CA", datetime: "08/25/2024 12:00 PM", tags: ["Charity", "Healthcare"], ageGroup: "18+", industry: "Healthcare" },
+            { name: "Animal Shelter Help", organization: "Happy Tails", location: "Austin, TX", datetime: "09/03/2024 09:00 AM", tags: ["Volunteering", "Animals"], ageGroup: "All Ages", industry: "Non-profit" },
+            { name: "Park Beautification", organization: "City of Phoenix", location: "Phoenix, AZ", datetime: "08/20/2024 07:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
+            { name: "Coding Bootcamp", organization: "TechStars", location: "Boston, MA", datetime: "08/28/2024 10:00 AM", tags: ["Education", "Technology"], ageGroup: "College", industry: "Technology" },
+            { name: "Community Theater", organization: "Playhouse", location: "Portland, OR", datetime: "09/08/2024 06:00 PM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts" },
+            { name: "Health Fair", organization: "Wellness Foundation", location: "Las Vegas, NV", datetime: "09/15/2024 10:00 AM", tags: ["Healthcare", "Community"], ageGroup: "18+", industry: "Healthcare" },
+            { name: "Environmental Rally", organization: "Planet Earth", location: "San Diego, CA", datetime: "09/22/2024 03:00 PM", tags: ["Environment", "Activism"], ageGroup: "All Ages", industry: "Environmental Services" },
+            { name: "Tutoring Program", organization: "Smart Kids", location: "Orlando, FL", datetime: "08/31/2024 04:00 PM", tags: ["Education", "Volunteering"], ageGroup: "High School", industry: "Education" },
+            { name: "Charity Run", organization: "Move for a Cause", location: "Nashville, TN", datetime: "09/14/2024 08:00 AM", tags: ["Charity", "Fitness"], ageGroup: "18+", industry: "Non-profit" },
+            { name: "Art Walk", organization: "City Arts", location: "Minneapolis, MN", datetime: "09/29/2024 10:00 AM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts" },
+            { name: "Senior Tech Help", organization: "Silver Linings", location: "Philadelphia, PA", datetime: "09/18/2024 11:00 AM", tags: ["Volunteering", "Technology"], ageGroup: "18+", industry: "Technology" },
+            { name: "Habitat Build", organization: "Habitat for Humanity", location: "Charlotte, NC", datetime: "09/25/2024 08:00 AM", tags: ["Community", "Volunteering"], ageGroup: "College", industry: "Non-profit" },
+            { name: "Cultural Festival", organization: "Global Village", location: "Atlanta, GA", datetime: "09/30/2024 12:00 PM", tags: ["Culture", "Community"], ageGroup: "All Ages", industry: "Arts" },
+            { name: "Mental Health Workshop", organization: "Mind Matters", location: "Newark, NJ", datetime: "09/10/2024 02:00 PM", tags: ["Healthcare", "Education"], ageGroup: "College", industry: "Healthcare" },
+            { name: "Literacy Program", organization: "Read & Succeed", location: "Raleigh, NC", datetime: "08/19/2024 03:00 PM", tags: ["Education", "Community"], ageGroup: "High School", industry: "Education" },
+            { name: "Food Bank Volunteer", organization: "Food for All", location: "Memphis, TN", datetime: "09/02/2024 11:00 AM", tags: ["Charity", "Volunteering"], ageGroup: "All Ages", industry: "Non-profit" },
+            { name: "Eco Fair", organization: "Green Future", location: "Oklahoma City, OK", datetime: "08/27/2024 09:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services" },
+            { name: "Youth Leadership Conference", organization: "Leaders of Tomorrow", location: "Washington, DC", datetime: "09/07/2024 09:00 AM", tags: ["Leadership", "Education"], ageGroup: "College", industry: "Education" },
+            { name: "Walk for Water", organization: "WaterAid", location: "San Antonio, TX", datetime: "09/13/2024 07:00 AM", tags: ["Charity", "Activism"], ageGroup: "18+", industry: "Non-profit" },
+            { name: "Museum Tour", organization: "National Museum", location: "Baltimore, MD", datetime: "09/09/2024 01:00 PM", tags: ["Culture", "Education"], ageGroup: "All Ages", industry: "Arts" },
+            { name: "Disaster Relief Fundraiser", organization: "Global Help", location: "Detroit, MI", datetime: "09/28/2024 06:00 PM", tags: ["Charity", "Community"], ageGroup: "18+", industry: "Non-profit" }
         ];
 
-        const itemsPerPage = 10;
-        let currentPage = 1;
         let filteredOpportunities = [...opportunities];
-        let favoriteOpportunities = [];
-
-        function toggleHeart(button, opp) {
-            const isFavorite = button.textContent === '❤️';
-            button.textContent = isFavorite ? '🤍' : '❤️';
-            
-            if (isFavorite) {
-                favoriteOpportunities = favoriteOpportunities.filter(fav => fav.name !== opp.name);
-            } else {
-                favoriteOpportunities.push(opp);
-            }
-        }
+        let currentPage = 1;
+        const itemsPerPage = 15;
 
         function renderOpportunities(page) {
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = page * itemsPerPage;
+            const opportunitiesToShow = filteredOpportunities.slice(startIndex, endIndex);
+
             const tableBody = document.getElementById('opportunityTableBody');
             tableBody.innerHTML = '';
 
-            const start = (page - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const pageOpportunities = filteredOpportunities.slice(start, end);
-
-            pageOpportunities.forEach(opp => {
+            opportunitiesToShow.forEach(opp => {
                 const row = document.createElement('tr');
-                row.className = 'hover:bg-purple-50 transition-colors duration-150 ease-in-out';
                 row.innerHTML = `
-                    <td class="px-4 py-4 whitespace-nowrap">
-                        <button class="text-xl focus:outline-none text-red-500" onclick='toggleHeart(this, ${JSON.stringify(opp)})'>
-                            ${favoriteOpportunities.some(fav => fav.name === opp.name) ? '❤️' : '🤍'}
-                        </button>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
+                        <input type="checkbox" class="favoriteCheckbox hidden" />
+                        <span class="heartIcon cursor-pointer text-xl" onclick="toggleFavorite(this)">🤍</span>
                     </td>
-                    <td class="px-4 py-4 whitespace-nowrap">${opp.name}</td>
-                    <td class="px-4 py-4 whitespace-nowrap">${opp.organization}</td>
-                    <td class="px-4 py-4 whitespace-nowrap">${opp.location}</td>
-                    <td class="px-4 py-4 whitespace-nowrap">${opp.datetime}</td>
-                    <td class="px-4 py-4">
-                        <div class="flex flex-wrap gap-1">
-                            ${opp.tags.map(tag => `<span class="inline-block bg-purple-200 rounded-full px-2 py-1 text-xs font-semibold text-purple-700">${tag}</span>`).join('')}
-                            <span class="inline-block bg-blue-200 rounded-full px-2 py-1 text-xs font-semibold text-blue-700">${opp.ageGroup}</span>
-                            <span class="inline-block bg-green-200 rounded-full px-2 py-1 text-xs font-semibold text-green-700">${opp.industry}</span>
-                        </div>
-                    </td>
-                    <td class="px-4 py-4 whitespace-nowrap">
-                        <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-1 px-2 rounded text-xs" data-opportunity='${JSON.stringify(opp)}'>
-                            View Details
-                        </button>
-                    </td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.name}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.organization}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.location}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.datetime}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.tags.join(', ')}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm font-medium"><button class="text-purple-700 hover:text-purple-900" onclick="showDetails('${opp.name}')">More Info</button></td>
                 `;
                 tableBody.appendChild(row);
             });
 
-            updatePagination();
+            document.getElementById('pageInfo').textContent = `Page ${page} of ${Math.ceil(filteredOpportunities.length / itemsPerPage)}`;
         }
 
-        function updatePagination() {
-            const totalPages = Math.ceil(filteredOpportunities.length / itemsPerPage);
-            document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
-            document.getElementById('prevPage').disabled = currentPage === 1;
-            document.getElementById('nextPage').disabled = currentPage === totalPages;
+        function toggleFavorite(heartIcon) {
+            const checkbox = heartIcon.previousElementSibling;
+            checkbox.checked = !checkbox.checked;
+            heartIcon.textContent = checkbox.checked ? '❤️' : '🤍';
         }
+
+        function filterOpportunities() {
+            const selectedIndustries = Array.from(document.querySelectorAll('.industryCheckbox:checked')).map(cb => cb.value);
+            const selectedAgeGroups = Array.from(document.querySelectorAll('.ageGroupCheckbox:checked')).map(cb => cb.value);
+
+            filteredOpportunities = opportunities.filter(opp =>
+                (selectedIndustries.length === 0 || selectedIndustries.includes(opp.industry)) &&
+                (selectedAgeGroups.length === 0 || selectedAgeGroups.includes(opp.ageGroup))
+            );
+            currentPage = 1;
+            renderOpportunities(currentPage);
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            filteredOpportunities = opportunities.filter(opp =>
+                opp.name.toLowerCase().includes(query) ||
+                opp.organization.toLowerCase().includes(query) ||
+                opp.location.toLowerCase().includes(query) ||
+                opp.ageGroup.toLowerCase().includes(query) ||
+                opp.industry.toLowerCase().includes(query) ||
+                opp.tags.some(tag => tag.toLowerCase().includes(query))
+            );
+            currentPage = 1;
+            renderOpportunities(currentPage);
+        });
+
+        document.getElementById('industryButton').addEventListener('click', () => {
+            document.getElementById('industryDropdown').classList.toggle('hidden');
+        });
+
+        document.getElementById('ageGroupButton').addEventListener('click', () => {
+            document.getElementById('ageGroupDropdown').classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.industryCheckbox, .ageGroupCheckbox').forEach(checkbox => {
+            checkbox.addEventListener('change', filterOpportunities);
+        });
 
         document.getElementById('prevPage').addEventListener('click', () => {
             if (currentPage > 1) {
@@ -196,102 +216,28 @@
         });
 
         document.getElementById('nextPage').addEventListener('click', () => {
-            const totalPages = Math.ceil(filteredOpportunities.length / itemsPerPage);
-            if (currentPage < totalPages) {
+            if (currentPage < Math.ceil(filteredOpportunities.length / itemsPerPage)) {
                 currentPage++;
                 renderOpportunities(currentPage);
             }
         });
 
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            filteredOpportunities = opportunities.filter(opp => 
-                opp.name.toLowerCase().includes(searchTerm) || 
-                opp.location.toLowerCase().includes(searchTerm) ||
-                opp.ageGroup.toLowerCase().includes(searchTerm) ||
-                opp.industry.toLowerCase().includes(searchTerm) ||
-                opp.organization.toLowerCase().includes(searchTerm)
-            );
-            currentPage = 1;
-            renderOpportunities(currentPage);
-        });
-
-        document.getElementById('industryDropdown').addEventListener('change', function() {
-            const selectedIndustry = this.value;
-            if (selectedIndustry) {
-                filteredOpportunities = opportunities.filter(opp => opp.industry === selectedIndustry);
-            } else {
-                filteredOpportunities = [...opportunities];
-            }
-            currentPage = 1;
-            renderOpportunities(currentPage);
-        });
-
-        document.getElementById('ageGroupDropdown').addEventListener('change', function() {
-            const selectedAgeGroup = this.value;
-            if (selectedAgeGroup) {
-                filteredOpportunities = opportunities.filter(opp => opp.ageGroup === selectedAgeGroup);
-            } else {
-                filteredOpportunities = [...opportunities];
-            }
-            currentPage = 1;
-            renderOpportunities(currentPage);
-        });
-
-        document.getElementById('allOpportunities').addEventListener('click', function() {
-            filteredOpportunities = [...opportunities];
-            currentPage = 1;
-            renderOpportunities(currentPage);
-        });
-
-        document.getElementById('favorites').addEventListener('click', function() {
-            filteredOpportunities = [...favoriteOpportunities];
-            currentPage = 1;
-            renderOpportunities(currentPage);
-        });
-
-        document.getElementById('exportFavorites').addEventListener('click', function() {
-            const csvContent = "data:text/csv;charset=utf-8," 
-                + "Name,Organization,Location,Date/Time,Age Group,Industry,Tags\n"
-                + favoriteOpportunities.map(opp => {
-                    return `"${opp.name}","${opp.organization}","${opp.location}","${opp.datetime}","${opp.ageGroup}","${opp.industry}","${opp.tags.join(', ')}"`;
-                }).join("\n");
-            
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "favorite_opportunities.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        });
-
-        document.addEventListener('click', function(e) {
-            if (e.target && e.target.matches('button[data-opportunity]')) {
-                const opp = JSON.parse(e.target.getAttribute('data-opportunity'));
-                showDetails(opp);
-            }
-        });
-
-        document.getElementById('closeModal').addEventListener('click', function() {
-            document.getElementById('detailsModal').classList.add('hidden');
-        });
-
-        function showDetails(opp) {
-            const modalContent = document.getElementById('modalContent');
-            modalContent.innerHTML = `
+        function showDetails(name) {
+            const opp = opportunities.find(o => o.name === name);
+            document.getElementById('modalContent').innerHTML = `
                 <h2 class="text-xl font-bold mb-2">${opp.name}</h2>
                 <p><strong>Organization:</strong> ${opp.organization}</p>
                 <p><strong>Location:</strong> ${opp.location}</p>
                 <p><strong>Date/Time:</strong> ${opp.datetime}</p>
-                <p><strong>Age Group:</strong> ${opp.ageGroup}</p>
-                <p><strong>Industry:</strong> ${opp.industry}</p>
                 <p><strong>Tags:</strong> ${opp.tags.join(', ')}</p>
             `;
             document.getElementById('detailsModal').classList.remove('hidden');
         }
 
-        // Initial render
+        document.getElementById('closeModal').addEventListener('click', () => {
+            document.getElementById('detailsModal').classList.add('hidden');
+        });
+
         renderOpportunities(currentPage);
     </script>
 </body>
