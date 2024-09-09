@@ -154,10 +154,9 @@
         opportunitiesToShow.forEach(opp => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
-                    <input type="checkbox" class="favoriteCheckbox hidden" />
-                    <span class="heartIcon cursor-pointer text-xl" onclick="toggleFavorite(this)">🤍</span>
-                </td>
+            <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
+                <span class="heartIcon cursor-pointer text-xl" onclick="toggleFavorite(this, '${opp.name}')">${opp.favorite ? '❤️' : '🤍'}</span>
+            </td>
                 <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.name}</td>
                 <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.organization}</td>
                 <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.location}</td>
@@ -170,14 +169,18 @@
             tableBody.appendChild(row);
         });
 
+        opportunities.forEach(opp => opp.favorite = false);
+
         document.getElementById('pageInfo').textContent = `Page ${page} of ${Math.ceil(filteredOpportunities.length / itemsPerPage)}`;
     }
 
-        function toggleFavorite(heartIcon) {
-            const checkbox = heartIcon.previousElementSibling;
-            checkbox.checked = !checkbox.checked;
-            heartIcon.textContent = checkbox.checked ? '❤️' : '🤍';
+        function toggleFavorite(heartIcon, oppName) {
+        const opp = opportunities.find(o => o.name === oppName);
+        if (opp) {
+            opp.favorite = !opp.favorite;
+            heartIcon.textContent = opp.favorite ? '❤️' : '🤍';
         }
+    }
 
         function filterOpportunities() {
             const selectedIndustries = Array.from(document.querySelectorAll('.industryCheckbox:checked')).map(cb => cb.value);
@@ -218,18 +221,51 @@
         });
 
         document.getElementById('prevPage').addEventListener('click', () => {
-            if (currentPage > 1) {
-                currentPage--;
-                renderOpportunities(currentPage);
-            }
-        });
+        if (currentPage > 1) {
+            currentPage--;
+            renderOpportunities(currentPage);
+        }
+    });
 
-        document.getElementById('nextPage').addEventListener('click', () => {
-            if (currentPage < Math.ceil(filteredOpportunities.length / itemsPerPage)) {
-                currentPage++;
-                renderOpportunities(currentPage);
-            }
-        });
+    document.getElementById('nextPage').addEventListener('click', () => {
+        if (currentPage < Math.ceil(filteredOpportunities.length / itemsPerPage)) {
+            currentPage++;
+            renderOpportunities(currentPage);
+        }
+    });
+
+    document.getElementById('allOpportunities').addEventListener('click', () => {
+        filteredOpportunities = [...opportunities];
+        currentPage = 1;
+        renderOpportunities(currentPage);
+    });
+
+    document.getElementById('favorites').addEventListener('click', () => {
+        filteredOpportunities = opportunities.filter(opp => opp.favorite);
+        currentPage = 1;
+        renderOpportunities(currentPage);
+    });
+
+    document.getElementById('exportFavorites').addEventListener('click', () => {
+        const favorites = opportunities.filter(opp => opp.favorite);
+        
+        if (favorites.length === 0) {
+            alert('No favorites selected to export.');
+            return;
+        }
+        
+        const csvContent = 'data:text/csv;charset=utf-8,' 
+            + 'Name,Organization,Location,Date/Time,Tags\n'
+            + favorites.map(opp => `"${opp.name}","${opp.organization}","${opp.location}","${opp.datetime}","${opp.tags.join(', ')}"`).join('\n');
+        
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', 'favorites.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
 
         function showDetails(name) {
             const opp = opportunities.find(o => o.name === name);
@@ -264,5 +300,6 @@
 
         renderOpportunities(currentPage);
     </script>
+    
 </body>
 </html>
