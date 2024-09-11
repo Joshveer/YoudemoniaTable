@@ -29,26 +29,27 @@
             <div class="flex items-center space-x-4">
                 <div class="relative">
                     <button id="industryButton" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Select Industry</button>
-                    <div id="industryDropdown" class="absolute bg-white shadow-lg rounded mt-2 w-48 hidden">
-                        <label class="block px-4 py-2"><input type="checkbox" value="Technology" class="industryCheckbox mr-2">Technology</label>
-                        <label class="block px-4 py-2"><input type="checkbox" value="Healthcare" class="industryCheckbox mr-2">Healthcare</label>
-                        <label class="block px-4 py-2"><input type="checkbox" value="Education" class="industryCheckbox mr-2">Education</label>
-                        <label class="block px-4 py-2"><input type="checkbox" value="Environmental" class="industryCheckbox mr-2">Environmental</label>
-                        <label class="block px-4 py-2"><input type="checkbox" value="Non-profit" class="industryCheckbox mr-2">Non-profit</label>
-                        <label class="block px-4 py-2"><input type="checkbox" value="Arts" class="industryCheckbox mr-2">Arts</label>
-                        <label class="block px-4 py-2"><input type="checkbox" value="Social Services" class="industryCheckbox mr-2">Social Services</label>
+                    <div id="industryDropdown" class="absolute bg-white shadow-lg rounded mt-2 w-40 hidden">
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Healthcare" class="industryCheckbox mr-2">Healthcare</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Activism" class="industryCheckbox mr-2">Activism</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Business" class="industryCheckbox mr-2">Business</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Humanities" class="industryCheckbox mr-2">Humanities</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Education" class="industryCheckbox mr-2">Education</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Environment" class="industryCheckbox mr-2">Environment</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Community Service" class="industryCheckbox mr-2">Community Service</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="STEM" class="industryCheckbox mr-2">STEM</label>
                     </div>
                 </div>
 
                 <div class="relative">
                     <button id="ageGroupButton" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Select Age Group</button>
-                    <div id="ageGroupDropdown" class="absolute bg-white shadow-lg rounded mt-2 w-48 hidden">
-                        <label class="block px-4 py-2"><input type="checkbox" value="Elementary" class="ageGroupCheckbox mr-2">Elementary School</label>
-                        <label class="block px-4 py-2"><input type="checkbox" value="Middle School" class="ageGroupCheckbox mr-2">Middle School</label>
-                        <label class="block px-4 py-2"><input type="checkbox" value="High School" class="ageGroupCheckbox mr-2">High School</label>
-                        <label class="block px-4 py-2"><input type="checkbox" value="College" class="ageGroupCheckbox mr-2">College</label>
-                        <label class="block px-4 py-2"><input type="checkbox" value="18+" class="ageGroupCheckbox mr-2">18+ Only</label>
-                        <label class="block px-4 py-2"><input type="checkbox" value="All Ages" class="ageGroupCheckbox mr-2">All Ages</label>
+                    <div id="ageGroupDropdown" class="absolute bg-white shadow-lg rounded mt-2 w-40 hidden">
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Elementary" class="ageGroupCheckbox mr-2">Elementary School</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Middle School" class="ageGroupCheckbox mr-2">Middle School</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="High School" class="ageGroupCheckbox mr-2">High School</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="College" class="ageGroupCheckbox mr-2">College</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="18+" class="ageGroupCheckbox mr-2">18+ Only</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="All Ages" class="ageGroupCheckbox mr-2">All Ages</label>
                     </div>
                 </div>
             </div>
@@ -101,20 +102,20 @@
 
     <script>
         const opportunities = [
-            { name: "Community Cleanup", organization: "Green Earth", location: "New York, NY", datetime: "08/15/2024 09:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services", bio: "Join us for a community-wide cleanup effort to beautify our local parks and streets. This is a great opportunity to make a visible impact on our environment and connect with like-minded individuals who care about our community." },
-            { name: "Food Drive", organization: "Feeding America", location: "Los Angeles, CA", datetime: "09/01/2024 10:00 AM", tags: ["Charity", "Food"], ageGroup: "18+", industry: "Non-profit", bio: "Help us collect and distribute food to those in need. Your efforts will directly impact families struggling with food insecurity in our community." },
-            { name: "Tech Workshop", organization: "Code for Good", location: "Chicago, IL", datetime: "08/22/2024 02:00 PM", tags: ["Education", "Technology"], ageGroup: "High School", industry: "Technology", bio: "Learn coding basics and apply your skills to create solutions for local non-profits. No prior coding experience necessary!" },
-            { name: "Art Exhibition", organization: "City Museum", location: "Houston, TX", datetime: "09/10/2024 11:00 AM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts", bio: "Experience a diverse range of artworks from local and international artists. Guided tours available throughout the day." },
+            { name: "Community Cleanup", organization: "Green Earth", location: "New York, NY", datetime: "08/15/2024 09:00 AM", tags: ["Environment", "Community Service", "Volunteering"], ageGroup: "All Ages", industry: "Environment", bio: "Join us for a community-wide cleanup effort to beautify our local parks and streets. This is a great opportunity to make a visible impact on our environment and connect with like-minded individuals who care about our community." },
+            { name: "Food Drive", organization: "Feeding America", location: "Los Angeles, CA", datetime: "09/01/2024 10:00 AM", tags: ["Community Service", "Volunteering"], ageGroup: "18+", industry: "Community Service", bio: "Help us collect and distribute food to those in need. Your efforts will directly impact families struggling with food insecurity in our community." },
+            { name: "Tech Workshop", organization: "Code for Good", location: "Chicago, IL", datetime: "08/22/2024 02:00 PM", tags: ["Education", "STEM", "Workshop"], ageGroup: "High School", industry: "STEM", bio: "Learn coding basics and apply your skills to create solutions for local non-profits. No prior coding experience necessary!" },
+            { name: "Art Exhibition", organization: "City Museum", location: "Houston, TX", datetime: "09/10/2024 11:00 AM", tags: ["Humanities", "Event"], ageGroup: "All Ages", industry: "Humanities", bio: "Experience a diverse range of artworks from local and international artists. Guided tours available throughout the day." },
             { name: "Elderly Care Volunteer", organization: "SilverCare", location: "Miami, FL", datetime: "08/30/2024 10:00 AM", tags: ["Healthcare", "Volunteering"], ageGroup: "18+", industry: "Healthcare", bio: "Spend time with elderly residents, assisting with activities and providing companionship. Training provided for all volunteers." },
-            { name: "Environmental Workshop", organization: "EcoSave", location: "Denver, CO", datetime: "09/05/2024 01:00 PM", tags: ["Environment", "Education"], ageGroup: "College", industry: "Environmental", bio: "Learn about sustainable practices and how to reduce your carbon footprint. Hands-on activities and guest speakers included." },
-            { name: "STEM Camp", organization: "Future Engineers", location: "Seattle, WA", datetime: "09/12/2024 08:00 AM", tags: ["Education", "STEM"], ageGroup: "Middle School", industry: "Education", bio: "A week-long camp introducing middle schoolers to various STEM fields through fun, interactive projects and experiments." },
-            { name: "Blood Donation", organization: "Red Cross", location: "San Francisco, CA", datetime: "08/25/2024 12:00 PM", tags: ["Charity", "Healthcare"], ageGroup: "18+", industry: "Healthcare", bio: "Your blood donation can save up to three lives. Join us for this critical community service event." },
-            { name: "Animal Shelter Help", organization: "Happy Tails", location: "Austin, TX", datetime: "09/03/2024 09:00 AM", tags: ["Volunteering", "Animals"], ageGroup: "All Ages", industry: "Non-profit", bio: "Help care for rescued animals and assist with shelter operations. Training provided for all volunteers." },
-            { name: "Park Beautification", organization: "City of Phoenix", location: "Phoenix, AZ", datetime: "08/20/2024 07:00 AM", tags: ["Environment", "Community"], ageGroup: "All Ages", industry: "Environmental Services", bio: "Help plant trees, flowers, and maintain our city parks. A great way to give back to the community and enjoy the outdoors." },
-            { name: "Coding Bootcamp", organization: "TechStars", location: "Boston, MA", datetime: "08/28/2024 10:00 AM", tags: ["Education", "Technology"], ageGroup: "College", industry: "Technology", bio: "Intensive coding workshop covering web development fundamentals. Great for beginners and those looking to enhance their skills." },
-            { name: "Community Theater", organization: "Playhouse", location: "Portland, OR", datetime: "09/08/2024 06:00 PM", tags: ["Art", "Culture"], ageGroup: "All Ages", industry: "Arts", bio: "Join our community theater production. Roles available for actors, set designers, and backstage crew." },
-            { name: "Health Fair", organization: "Wellness Foundation", location: "Las Vegas, NV", datetime: "09/15/2024 10:00 AM", tags: ["Healthcare", "Community"], ageGroup: "18+", industry: "Healthcare", bio: "Free health screenings, wellness workshops, and fitness demonstrations for the community." },
-            { name: "Environmental Rally", organization: "Planet Earth", location: "San Diego, CA", datetime: "09/22/2024 03:00 PM", tags: ["Environment", "Activism"], ageGroup: "All Ages", industry: "Environmental Services", bio: "Rally to raise awareness about climate change and promote sustainable living practices." },
+            { name: "Environmental Workshop", organization: "EcoSave", location: "Denver, CO", datetime: "09/05/2024 01:00 PM", tags: ["Environment", "Education", "Workshop"], ageGroup: "College", industry: "Environment", bio: "Learn about sustainable practices and how to reduce your carbon footprint. Hands-on activities and guest speakers included." },
+            { name: "STEM Camp", organization: "Future Engineers", location: "Seattle, WA", datetime: "09/12/2024 08:00 AM", tags: ["Education", "STEM", "Event"], ageGroup: "Middle School", industry: "STEM", bio: "A week-long camp introducing middle schoolers to various STEM fields through fun, interactive projects and experiments." },
+            { name: "Blood Donation", organization: "Red Cross", location: "San Francisco, CA", datetime: "08/25/2024 12:00 PM", tags: ["Healthcare", "Community Service", "Event"], ageGroup: "18+", industry: "Healthcare", bio: "Your blood donation can save up to three lives. Join us for this critical community service event." },
+            { name: "Animal Shelter Help", organization: "Happy Tails", location: "Austin, TX", datetime: "09/03/2024 09:00 AM", tags: ["Community Service", "Volunteering"], ageGroup: "All Ages", industry: "Community Service", bio: "Help care for rescued animals and assist with shelter operations. Training provided for all volunteers." },
+            { name: "Park Beautification", organization: "City of Phoenix", location: "Phoenix, AZ", datetime: "08/20/2024 07:00 AM", tags: ["Environment", "Community Service", "Volunteering"], ageGroup: "All Ages", industry: "Environment", bio: "Help plant trees, flowers, and maintain our city parks. A great way to give back to the community and enjoy the outdoors." },
+            { name: "Coding Bootcamp", organization: "TechStars", location: "Boston, MA", datetime: "08/28/2024 10:00 AM", tags: ["Education", "STEM", "Workshop"], ageGroup: "College", industry: "STEM", bio: "Intensive coding workshop covering web development fundamentals. Great for beginners and those looking to enhance their skills." },
+            { name: "Community Theater", organization: "Playhouse", location: "Portland, OR", datetime: "09/08/2024 06:00 PM", tags: ["Humanities", "Event"], ageGroup: "All Ages", industry: "Humanities", bio: "Join our community theater production. Roles available for actors, set designers, and backstage crew." },
+            { name: "Health Fair", organization: "Wellness Foundation", location: "Las Vegas, NV", datetime: "09/15/2024 10:00 AM", tags: ["Healthcare", "Community Service", "Event"], ageGroup: "18+", industry: "Healthcare", bio: "Free health screenings, wellness workshops, and fitness demonstrations for the community." },
+            { name: "Environmental Rally", organization: "Planet Earth", location: "San Diego, CA", datetime: "09/22/2024 03:00 PM", tags: ["Environment", "Activism", "Event"], ageGroup: "All Ages", industry: "Environment", bio: "Rally to raise awareness about climate change and promote sustainable living practices." },
             { name: "Tutoring Program", organization: "Smart Kids", location: "Orlando, FL", datetime: "08/31/2024 04:00 PM", tags: ["Education", "Volunteering"], ageGroup: "High School", industry: "Education", bio: "Volunteer to tutor elementary and middle school students in various subjects. Make a difference in a child's academic journey." }
         ];
 
@@ -124,24 +125,22 @@
 
         function getTagColor(tag) {
             const colors = {
+                'Healthcare': 'bg-red-200 text-red-800',
+                'Activism': 'bg-purple-200 text-purple-800',
+                'Business': 'bg-blue-200 text-blue-800',
+                'Humanities': 'bg-yellow-200 text-yellow-800',
+                'Education': 'bg-gray-200 text-gray-800',
                 'Environment': 'bg-green-200 text-green-800',
-                'Community': 'bg-blue-200 text-blue-800',
-                'Charity': 'bg-red-200 text-red-800',
-                'Food': 'bg-yellow-200 text-yellow-800',
-                'Education': 'bg-indigo-200 text-indigo-800',
-                'Technology': 'bg-purple-200 text-purple-800',
-                'Art': 'bg-pink-200 text-pink-800',
-                'Culture': 'bg-orange-200 text-orange-800',
-                'Healthcare': 'bg-teal-200 text-teal-800',
-                'Volunteering': 'bg-cyan-200 text-cyan-800',
-                'STEM': 'bg-lime-200 text-lime-800',
-                'Animals': 'bg-amber-200 text-amber-800',
-                'Activism': 'bg-rose-200 text-rose-800',
-                'Fitness': 'bg-sky-200 text-sky-800',
-                'Leadership': 'bg-emerald-200 text-emerald-800'
+                'Community Service': 'bg-orange-200 text-orange-800',
+                'STEM': 'bg-teal-200 text-teal-800',
+                'Internship': 'bg-red-700 text-white',
+                'Event': 'bg-purple-500 text-white',
+                'Workshop': 'bg-teal-600 text-white',
+                'Volunteering': 'bg-blue-700 text-white'
             };
             return colors[tag] || 'bg-gray-200 text-gray-800'; // default color
         }
+
 
         function renderOpportunities(page) {
         const startIndex = (page - 1) * itemsPerPage;
@@ -239,6 +238,7 @@
         currentPage = 1;
         renderOpportunities(currentPage);
     });
+    
 
     document.getElementById('favorites').addEventListener('click', () => {
         filteredOpportunities = opportunities.filter(opp => opp.favorite);
@@ -267,7 +267,7 @@
         document.body.removeChild(link);
     });
 
-        function showDetails(name) {
+    function showDetails(name) {
             const opp = opportunities.find(o => o.name === name);
             document.getElementById('modalContent').innerHTML = `
                 <h2 class="text-3xl font-bold mb-4 text-purple-700">${opp.name}</h2>
@@ -297,6 +297,21 @@
         document.getElementById('closeModal').addEventListener('click', () => {
             document.getElementById('detailsModal').classList.add('hidden');
         });
+
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderOpportunities(currentPage);
+            }
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if (currentPage < Math.ceil(filteredOpportunities.length / itemsPerPage)) {
+                currentPage++;
+                renderOpportunities(currentPage);
+            }
+        });
+
 
         renderOpportunities(currentPage);
     </script>
