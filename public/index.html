@@ -9,23 +9,23 @@
 <body class="bg-purple-50 p-4">
     <div class="max-w-7xl mx-auto">
         <!-- Header with logo, search bar, and dropdowns -->
-        <div class="flex justify-between items-center mb-8">
+        <div class="flex justify-between items-center mb-4"> <!-- Changed mb-8 to mb-4 -->
             <!-- Logo -->
             <div class="w-20 h-20 flex-shrink-0">
                 <img src="logo.webp" alt="Logo" class="w-full h-full object-contain">
             </div>
 
-            <!-- Centered search bar -->
+            <!-- Shortened search bar -->
             <div class="flex-1 mx-4">
                 <div class="relative">
-                    <input type="text" id="searchInput" placeholder="Search by Name, Location, Age Group, or Industry" class="pl-10 pr-4 py-2 border rounded-full w-full bg-white">
+                    <input type="text" id="searchInput" placeholder="Search by Name, Location, Age Group, Industry, or Opportunity Type" class="pl-10 pr-4 py-2 border rounded-full w-full bg-white">
                     <svg class="w-5 h-5 text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </div>
             </div>
 
-            <!-- Dropdowns for Industry and Age Group -->
+            <!-- Dropdowns for Industry, Age Group, and Opportunity Type -->
             <div class="flex items-center space-x-4">
                 <div class="relative">
                     <button id="industryButton" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Select Industry</button>
@@ -50,6 +50,16 @@
                         <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="College" class="ageGroupCheckbox mr-2">College</label>
                         <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="18+" class="ageGroupCheckbox mr-2">18+ Only</label>
                         <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="All Ages" class="ageGroupCheckbox mr-2">All Ages</label>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <button id="opportunityTypeButton" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Select Opportunity Type</button>
+                    <div id="opportunityTypeDropdown" class="absolute bg-white shadow-lg rounded mt-2 w-40 hidden">
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Internship" class="opportunityTypeCheckbox mr-2">Internship</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Workshop" class="opportunityTypeCheckbox mr-2">Workshop</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Event" class="opportunityTypeCheckbox mr-2">Event</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="Volunteering" class="opportunityTypeCheckbox mr-2">Volunteering</label>
                     </div>
                 </div>
             </div>
@@ -141,21 +151,20 @@
             return colors[tag] || 'bg-gray-200 text-gray-800'; // default color
         }
 
-
         function renderOpportunities(page) {
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = page * itemsPerPage;
-        const opportunitiesToShow = filteredOpportunities.slice(startIndex, endIndex);
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = page * itemsPerPage;
+            const opportunitiesToShow = filteredOpportunities.slice(startIndex, endIndex);
 
-        const tableBody = document.getElementById('opportunityTableBody');
-        tableBody.innerHTML = '';
+            const tableBody = document.getElementById('opportunityTableBody');
+            tableBody.innerHTML = '';
 
-        opportunitiesToShow.forEach(opp => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-            <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
-                <span class="heartIcon cursor-pointer text-xl" onclick="toggleFavorite(this, '${opp.name}')">${opp.favorite ? '❤️' : '🤍'}</span>
-            </td>
+            opportunitiesToShow.forEach(opp => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
+                    <span class="heartIcon cursor-pointer text-xl" onclick="toggleFavorite(this, '${opp.name}')">${opp.favorite ? '❤️' : '🤍'}</span>
+                </td>
                 <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.name}</td>
                 <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.organization}</td>
                 <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.location}</td>
@@ -164,14 +173,13 @@
                     ${opp.tags.map(tag => `<span class="inline-block px-2 py-1 rounded-full text-xs font-semibold mr-1 mb-1 ${getTagColor(tag)}">${tag}</span>`).join('')}
                 </td>
                 <td class="px-4 py-4 whitespace-nowrap text-sm font-medium"><button class="text-purple-700 hover:text-purple-900" onclick="showDetails('${opp.name}')">More Info</button></td>
-            `;
-            tableBody.appendChild(row);
-        });
+                `;
+                tableBody.appendChild(row);
+            });
 
-        opportunities.forEach(opp => opp.favorite = false);
+            document.getElementById('pageInfo').textContent = `Page ${page} of ${Math.ceil(filteredOpportunities.length / itemsPerPage)}`;
+        }
 
-        document.getElementById('pageInfo').textContent = `Page ${page} of ${Math.ceil(filteredOpportunities.length / itemsPerPage)}`;
-    }
 
         function toggleFavorite(heartIcon, oppName) {
         const opp = opportunities.find(o => o.name === oppName);
@@ -184,10 +192,12 @@
         function filterOpportunities() {
             const selectedIndustries = Array.from(document.querySelectorAll('.industryCheckbox:checked')).map(cb => cb.value);
             const selectedAgeGroups = Array.from(document.querySelectorAll('.ageGroupCheckbox:checked')).map(cb => cb.value);
+            const selectedOpportunityTypes = Array.from(document.querySelectorAll('.opportunityTypeCheckbox:checked')).map(cb => cb.value);
 
             filteredOpportunities = opportunities.filter(opp =>
                 (selectedIndustries.length === 0 || selectedIndustries.includes(opp.industry)) &&
-                (selectedAgeGroups.length === 0 || selectedAgeGroups.includes(opp.ageGroup))
+                (selectedAgeGroups.length === 0 || selectedAgeGroups.includes(opp.ageGroup)) &&
+                (selectedOpportunityTypes.length === 0 || selectedOpportunityTypes.some(type => opp.tags.includes(type)))
             );
             currentPage = 1;
             renderOpportunities(currentPage);
@@ -268,31 +278,32 @@
     });
 
     function showDetails(name) {
-            const opp = opportunities.find(o => o.name === name);
-            document.getElementById('modalContent').innerHTML = `
-                <h2 class="text-3xl font-bold mb-4 text-purple-700">${opp.name}</h2>
-                <div class="grid grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <p class="text-lg"><strong class="text-purple-600">Organization:</strong> ${opp.organization}</p>
-                        <p class="text-lg"><strong class="text-purple-600">Location:</strong> ${opp.location}</p>
-                        <p class="text-lg"><strong class="text-purple-600">Date/Time:</strong> ${opp.datetime}</p>
-                    </div>
-                    <div>
-                        <p class="text-lg"><strong class="text-purple-600">Age Group:</strong> ${opp.ageGroup}</p>
-                        <p class="text-lg"><strong class="text-purple-600">Industry:</strong> ${opp.industry}</p>
-                        <p class="text-lg"><strong class="text-purple-600">Tags:</strong></p>
-                        <div class="flex flex-wrap">
-                            ${opp.tags.map(tag => `<span class="inline-block px-2 py-1 rounded-full text-xs font-semibold mr-1 mb-1 ${getTagColor(tag)}">${tag}</span>`).join('')}
-                        </div>
-                    </div>
+    const opp = opportunities.find(o => o.name === name);
+    document.getElementById('modalContent').innerHTML = `
+        <h2 class="text-4xl font-extrabold mb-6 text-purple-700">${opp.name}</h2>
+        <div class="grid grid-cols-2 gap-6 mb-6">
+            <div>
+                <p class="text-xl"><strong class="text-purple-600">Organization:</strong> ${opp.organization}</p>
+                <p class="text-xl"><strong class="text-purple-600">Location:</strong> ${opp.location}</p>
+                <p class="text-xl"><strong class="text-purple-600">Date/Time:</strong> ${opp.datetime}</p>
+            </div>
+            <div>
+                <p class="text-xl"><strong class="text-purple-600">Age Group:</strong> ${opp.ageGroup}</p>
+                <p class="text-xl"><strong class="text-purple-600">Industry:</strong> ${opp.industry}</p>
+                <p class="text-xl"><strong class="text-purple-600"></strong></p>
+                <div class="flex flex-wrap">
+                    ${opp.tags.map(tag => `<span class="inline-block px-3 py-2 rounded-full text-sm font-semibold mr-2 mb-2 ${getTagColor(tag)}">${tag}</span>`).join('')}
                 </div>
-                <div class="mb-4">
-                    <h3 class="text-xl font-semibold mb-2 text-purple-600">About this opportunity:</h3>
-                    <p class="text-gray-700">${opp.bio || 'No additional information available.'}</p>
-                </div>
-            `;
-            document.getElementById('detailsModal').classList.remove('hidden');
-        }
+            </div>
+        </div>
+        <div class="mb-6">
+            <h3 class="text-2xl font-bold mb-4 text-purple-600">About this opportunity:</h3>
+            <p class="text-lg text-gray-700">${opp.bio || 'No additional information available.'}</p>
+        </div>
+    `;
+    document.getElementById('detailsModal').classList.remove('hidden');
+}
+
 
         document.getElementById('closeModal').addEventListener('click', () => {
             document.getElementById('detailsModal').classList.add('hidden');
@@ -310,6 +321,15 @@
                 currentPage++;
                 renderOpportunities(currentPage);
             }
+        });
+
+        document.getElementById('opportunityTypeButton').addEventListener('click', () => {
+            document.getElementById('opportunityTypeDropdown').classList.toggle('hidden');
+        });
+
+        // Add event listeners for opportunity type checkboxes
+        document.querySelectorAll('.opportunityTypeCheckbox').forEach(checkbox => {
+            checkbox.addEventListener('change', filterOpportunities);
         });
 
 
