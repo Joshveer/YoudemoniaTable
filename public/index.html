@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-purple-50 p-4">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-full mx-auto px-4">
         <!-- Header with logo, search bar, and dropdowns -->
         <div class="flex justify-between items-center mb-4"> <!-- Changed mb-8 to mb-4 -->
             <!-- Logo -->
@@ -77,15 +77,16 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-purple-700">
                     <tr>
-                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Favorite</th>
-                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Opportunity Name</th>
-                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Organization</th>
-                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Location</th>
-                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Date/Time</th>
-                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Tags</th>
-                        <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">More Info</th>
+                        <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Favorite</th>
+                        <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Opportunity Name</th>
+                        <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Organization</th>
+                        <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Location</th>
+                        <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Date/Time</th>
+                        <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Tags</th>
+                        <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Opportunity Type</th>
+                        <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">More Info</th>
                     </tr>
-                </thead>
+                </thead>              
                 <tbody id="opportunityTableBody" class="bg-white divide-y divide-gray-200">
                     <!-- Opportunities will be dynamically added here -->
                 </tbody>
@@ -112,21 +113,21 @@
 
     <script>
         const opportunities = [
-            { name: "Community Cleanup", organization: "Green Earth", location: "New York, NY", datetime: "08/15/2024 09:00 AM", tags: ["Environment", "Community Service", "Volunteering"], ageGroup: "All Ages", industry: "Environment", bio: "Join us for a community-wide cleanup effort to beautify our local parks and streets. This is a great opportunity to make a visible impact on our environment and connect with like-minded individuals who care about our community." },
-            { name: "Food Drive", organization: "Feeding America", location: "Los Angeles, CA", datetime: "09/01/2024 10:00 AM", tags: ["Community Service", "Volunteering"], ageGroup: "18+", industry: "Community Service", bio: "Help us collect and distribute food to those in need. Your efforts will directly impact families struggling with food insecurity in our community." },
-            { name: "Tech Workshop", organization: "Code for Good", location: "Chicago, IL", datetime: "08/22/2024 02:00 PM", tags: ["Education", "STEM", "Workshop"], ageGroup: "High School", industry: "STEM", bio: "Learn coding basics and apply your skills to create solutions for local non-profits. No prior coding experience necessary!" },
-            { name: "Art Exhibition", organization: "City Museum", location: "Houston, TX", datetime: "09/10/2024 11:00 AM", tags: ["Humanities", "Event"], ageGroup: "All Ages", industry: "Humanities", bio: "Experience a diverse range of artworks from local and international artists. Guided tours available throughout the day." },
-            { name: "Elderly Care Volunteer", organization: "SilverCare", location: "Miami, FL", datetime: "08/30/2024 10:00 AM", tags: ["Healthcare", "Volunteering"], ageGroup: "18+", industry: "Healthcare", bio: "Spend time with elderly residents, assisting with activities and providing companionship. Training provided for all volunteers." },
-            { name: "Environmental Workshop", organization: "EcoSave", location: "Denver, CO", datetime: "09/05/2024 01:00 PM", tags: ["Environment", "Education", "Workshop"], ageGroup: "College", industry: "Environment", bio: "Learn about sustainable practices and how to reduce your carbon footprint. Hands-on activities and guest speakers included." },
-            { name: "STEM Camp", organization: "Future Engineers", location: "Seattle, WA", datetime: "09/12/2024 08:00 AM", tags: ["Education", "STEM", "Event"], ageGroup: "Middle School", industry: "STEM", bio: "A week-long camp introducing middle schoolers to various STEM fields through fun, interactive projects and experiments." },
-            { name: "Blood Donation", organization: "Red Cross", location: "San Francisco, CA", datetime: "08/25/2024 12:00 PM", tags: ["Healthcare", "Community Service", "Event"], ageGroup: "18+", industry: "Healthcare", bio: "Your blood donation can save up to three lives. Join us for this critical community service event." },
-            { name: "Animal Shelter Help", organization: "Happy Tails", location: "Austin, TX", datetime: "09/03/2024 09:00 AM", tags: ["Community Service", "Volunteering"], ageGroup: "All Ages", industry: "Community Service", bio: "Help care for rescued animals and assist with shelter operations. Training provided for all volunteers." },
-            { name: "Park Beautification", organization: "City of Phoenix", location: "Phoenix, AZ", datetime: "08/20/2024 07:00 AM", tags: ["Environment", "Community Service", "Volunteering"], ageGroup: "All Ages", industry: "Environment", bio: "Help plant trees, flowers, and maintain our city parks. A great way to give back to the community and enjoy the outdoors." },
-            { name: "Coding Bootcamp", organization: "TechStars", location: "Boston, MA", datetime: "08/28/2024 10:00 AM", tags: ["Education", "STEM", "Workshop"], ageGroup: "College", industry: "STEM", bio: "Intensive coding workshop covering web development fundamentals. Great for beginners and those looking to enhance their skills." },
-            { name: "Community Theater", organization: "Playhouse", location: "Portland, OR", datetime: "09/08/2024 06:00 PM", tags: ["Humanities", "Event"], ageGroup: "All Ages", industry: "Humanities", bio: "Join our community theater production. Roles available for actors, set designers, and backstage crew." },
-            { name: "Health Fair", organization: "Wellness Foundation", location: "Las Vegas, NV", datetime: "09/15/2024 10:00 AM", tags: ["Healthcare", "Community Service", "Event"], ageGroup: "18+", industry: "Healthcare", bio: "Free health screenings, wellness workshops, and fitness demonstrations for the community." },
-            { name: "Environmental Rally", organization: "Planet Earth", location: "San Diego, CA", datetime: "09/22/2024 03:00 PM", tags: ["Environment", "Activism", "Event"], ageGroup: "All Ages", industry: "Environment", bio: "Rally to raise awareness about climate change and promote sustainable living practices." },
-            { name: "Tutoring Program", organization: "Smart Kids", location: "Orlando, FL", datetime: "08/31/2024 04:00 PM", tags: ["Education", "Volunteering"], ageGroup: "High School", industry: "Education", bio: "Volunteer to tutor elementary and middle school students in various subjects. Make a difference in a child's academic journey." }
+            { name: "Community Cleanup", organization: "Green Earth", location: "New York, NY", datetime: "08/15/2024 09:00 AM", tags: ["Environment", "Community Service"], opportunityType: "Volunteering", ageGroup: "All Ages", industry: "Environment", bio: "Join us for a community-wide cleanup effort to beautify our local parks and streets. This is a great opportunity to make a visible impact on our environment and connect with like-minded individuals who care about our community." },
+            { name: "Food Drive", organization: "Feeding America", location: "Los Angeles, CA", datetime: "09/01/2024 10:00 AM", tags: ["Community Service"], opportunityType: "Volunteering", ageGroup: "18+", industry: "Community Service", bio: "Help us collect and distribute food to those in need. Your efforts will directly impact families struggling with food insecurity in our community." },
+            { name: "Tech Workshop", organization: "Code for Good", location: "Chicago, IL", datetime: "08/22/2024 02:00 PM", tags: ["Education", "STEM"], opportunityType: "Workshop", ageGroup: "High School", industry: "STEM", bio: "Learn coding basics and apply your skills to create solutions for local non-profits. No prior coding experience necessary!" },
+            { name: "Art Exhibition", organization: "City Museum", location: "Houston, TX", datetime: "09/10/2024 11:00 AM", tags: ["Humanities"], opportunityType: "Event", ageGroup: "All Ages", industry: "Humanities", bio: "Experience a diverse range of artworks from local and international artists. Guided tours available throughout the day." },
+            { name: "Elderly Care Volunteer", organization: "SilverCare", location: "Miami, FL", datetime: "08/30/2024 10:00 AM", tags: ["Healthcare"], opportunityType: "Volunteering", ageGroup: "18+", industry: "Healthcare", bio: "Spend time with elderly residents, assisting with activities and providing companionship. Training provided for all volunteers." },
+            { name: "Environmental Workshop", organization: "EcoSave", location: "Denver, CO", datetime: "09/05/2024 01:00 PM", tags: ["Environment", "Education"], opportunityType: "Workshop", ageGroup: "College", industry: "Environment", bio: "Learn about sustainable practices and how to reduce your carbon footprint. Hands-on activities and guest speakers included." },
+            { name: "STEM Camp", organization: "Future Engineers", location: "Seattle, WA", datetime: "09/12/2024 08:00 AM", tags: ["Education", "STEM"], opportunityType: "Event", ageGroup: "Middle School", industry: "STEM", bio: "A week-long camp introducing middle schoolers to various STEM fields through fun, interactive projects and experiments." },
+            { name: "Blood Donation", organization: "Red Cross", location: "San Francisco, CA", datetime: "08/25/2024 12:00 PM", tags: ["Healthcare", "Community Service"], opportunityType: "Event", ageGroup: "18+", industry: "Healthcare", bio: "Your blood donation can save up to three lives. Join us for this critical community service event." },
+            { name: "Animal Shelter Help", organization: "Happy Tails", location: "Austin, TX", datetime: "09/03/2024 09:00 AM", tags: ["Community Service"], opportunityType: "Volunteering", ageGroup: "All Ages", industry: "Community Service", bio: "Help care for rescued animals and assist with shelter operations. Training provided for all volunteers." },
+            { name: "Park Beautification", organization: "City of Phoenix", location: "Phoenix, AZ", datetime: "08/20/2024 07:00 AM", tags: ["Environment", "Community Service"], opportunityType: "Volunteering", ageGroup: "All Ages", industry: "Environment", bio: "Help plant trees, flowers, and maintain our city parks. A great way to give back to the community and enjoy the outdoors." },
+            { name: "Coding Bootcamp", organization: "TechStars", location: "Boston, MA", datetime: "08/28/2024 10:00 AM", tags: ["Education", "STEM"], opportunityType: "Workshop", ageGroup: "College", industry: "STEM", bio: "Intensive coding workshop covering web development fundamentals. Great for beginners and those looking to enhance their skills." },
+            { name: "Community Theater", organization: "Playhouse", location: "Portland, OR", datetime: "09/08/2024 06:00 PM", tags: ["Humanities"], opportunityType: "Event", ageGroup: "All Ages", industry: "Humanities", bio: "Join our community theater production. Roles available for actors, set designers, and backstage crew." },
+            { name: "Health Fair", organization: "Wellness Foundation", location: "Las Vegas, NV", datetime: "09/15/2024 10:00 AM", tags: ["Healthcare", "Community Service"], opportunityType: "Event", ageGroup: "18+", industry: "Healthcare", bio: "Free health screenings, wellness workshops, and fitness demonstrations for the community." },
+            { name: "Environmental Rally", organization: "Planet Earth", location: "San Diego, CA", datetime: "09/22/2024 03:00 PM", tags: ["Environment", "Activism"], opportunityType: "Event", ageGroup: "All Ages", industry: "Environment", bio: "Rally to raise awareness about climate change and promote sustainable living practices." },
+            { name: "Tutoring Program", organization: "Smart Kids", location: "Orlando, FL", datetime: "08/31/2024 04:00 PM", tags: ["Education"], opportunityType: "Volunteering", ageGroup: "High School", industry: "Education", bio: "Volunteer to tutor elementary and middle school students in various subjects. Make a difference in a child's academic journey." }
         ];
 
         let filteredOpportunities = [...opportunities];
@@ -151,10 +152,31 @@
             return colors[tag] || 'bg-gray-200 text-gray-800'; // default color
         }
 
+        // Convert date string to Date object
+        function parseDateTime(dateTimeString) {
+            const [date, time] = dateTimeString.split(' ');
+            const [month, day, year] = date.split('/');
+            const [hour, minute] = time.split(':');
+            return new Date(year, month - 1, day, hour, minute);
+        }
+
+        // Sort opportunities by date and time
+        function sortOpportunitiesByDateTime(opportunities) {
+            return opportunities.sort((a, b) => {
+                const dateA = parseDateTime(a.datetime);
+                const dateB = parseDateTime(b.datetime);
+                return dateA - dateB;
+            });
+        }
+
+        // Modify the existing renderOpportunities function
         function renderOpportunities(page) {
+            // Sort the opportunities before rendering
+            const sortedOpportunities = sortOpportunitiesByDateTime(filteredOpportunities);
+            
             const startIndex = (page - 1) * itemsPerPage;
             const endIndex = page * itemsPerPage;
-            const opportunitiesToShow = filteredOpportunities.slice(startIndex, endIndex);
+            const opportunitiesToShow = sortedOpportunities.slice(startIndex, endIndex);
 
             const tableBody = document.getElementById('opportunityTableBody');
             tableBody.innerHTML = '';
@@ -162,23 +184,34 @@
             opportunitiesToShow.forEach(opp => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
-                    <span class="heartIcon cursor-pointer text-xl" onclick="toggleFavorite(this, '${opp.name}')">${opp.favorite ? '❤️' : '🤍'}</span>
-                </td>
-                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.name}</td>
-                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.organization}</td>
-                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.location}</td>
-                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">${opp.datetime}</td>
-                <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">
-                    ${opp.tags.map(tag => `<span class="inline-block px-2 py-1 rounded-full text-xs font-semibold mr-1 mb-1 ${getTagColor(tag)}">${tag}</span>`).join('')}
-                </td>
-                <td class="px-4 py-4 whitespace-nowrap text-sm font-medium"><button class="text-purple-700 hover:text-purple-900" onclick="showDetails('${opp.name}')">More Info</button></td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm font-bold">
+                        <span class="heartIcon cursor-pointer text-xl" onclick="toggleFavorite(this, '${opp.name}')">
+                            ${opp.favorite ? '❤️' : '🤍'}
+                        </span>
+                    </td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${opp.name}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${opp.organization}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${opp.location}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${opp.datetime}</td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">
+                        ${opp.tags.map(tag => `<span class="inline-block px-2 py-1 rounded-full text-xs font-semibold mr-1 mb-1 ${getTagColor(tag)}">${tag}</span>`).join('')}
+                    </td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
+                        <span class="inline-block px-2 py-1 rounded-full text-xs font-bold ${getTagColor(opp.opportunityType)}">${opp.opportunityType}</span>
+                    </td>
+                    <td class="px-4 py-4 whitespace-nowrap text-sm font-bold">
+                        <button class="text-purple-700 hover:text-purple-900 font-bold" onclick="showDetails('${opp.name}')">More Info</button>
+                    </td>
                 `;
                 tableBody.appendChild(row);
             });
 
-            document.getElementById('pageInfo').textContent = `Page ${page} of ${Math.ceil(filteredOpportunities.length / itemsPerPage)}`;
+            document.getElementById('pageInfo').textContent = `Page ${page} of ${Math.ceil(sortedOpportunities.length / itemsPerPage)}`;
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderOpportunities(currentPage);
+        });
 
 
         function toggleFavorite(heartIcon, oppName) {
@@ -197,7 +230,7 @@
             filteredOpportunities = opportunities.filter(opp =>
                 (selectedIndustries.length === 0 || selectedIndustries.includes(opp.industry)) &&
                 (selectedAgeGroups.length === 0 || selectedAgeGroups.includes(opp.ageGroup)) &&
-                (selectedOpportunityTypes.length === 0 || selectedOpportunityTypes.some(type => opp.tags.includes(type)))
+                (selectedOpportunityTypes.length === 0 || selectedOpportunityTypes.includes(opp.opportunityType))
             );
             currentPage = 1;
             renderOpportunities(currentPage);
@@ -334,6 +367,7 @@
 
 
         renderOpportunities(currentPage);
+        
     </script>
     
 </body>
