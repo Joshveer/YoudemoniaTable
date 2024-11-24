@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opportunity Spreadsheet</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <link rel="stylesheet" href="styles.css">
     <!-- Set the favicon using logo.webp -->
     <link rel="icon" href="favicon.png" type="image/png">
 </head>
@@ -73,6 +73,10 @@
             <button id="allOpportunities" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">All Opportunities</button>
             <button id="favorites" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Favorites</button>
             <button id="exportFavorites" class="bg-red-700 text-white font-bold px-4 py-2 rounded-full text-sm">Export Favorites</button>
+            <div style="display: flex; align-items: center; justify-content: center;">Enable Location Match<label class="switch" style="margin-left: 10px">
+                <input type="checkbox" id="locationChecker">
+                <span class="slider round"></span>
+              </label></div>
         </div>
 
         <!-- Spreadsheet table -->
@@ -84,7 +88,8 @@
                         <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Opportunity Name</th>
                         <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Opportunity Type</th> <!-- Moved Opportunity Type here -->
                         <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Organization</th>
-                        <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Location</th>
+                        <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider locHeader">Location
+                          </th>
                         <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Date</th>
                         <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Tags</th>
                         <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">More Info</th>
@@ -95,7 +100,46 @@
                 </tbody>
             </table>
         </div>
+        <script>
+            /*This is the part that actually eliminates the location tab based on whether they want it or not and sorts results*/
 
+            let locCheck = document.getElementById("locationChecker");
+            let locs = document.getElementsByClassName("locData")
+            let locHeader = document.getElementsByClassName("locHeader")[0];
+            function comparator(a, b) {
+                let i1 = Number(a.getElementsByTagName("span")[0].innerHTML.split("(")[1].split(" ")[0]);
+                let i2 = Number(b.getElementsByTagName("span")[0].innerHTML.split("(")[1].split(" ")[0]);
+                if (i1 < i2) {
+                    return -1;}
+                if (i1 > i2) {
+                    return 1;}
+                return 0;
+            }
+            function SortData() {
+                const tableBody = document.getElementById('opportunityTableBody');
+                var locsArray = Array.from(locs);
+                let sorted = locsArray.sort(comparator);
+                tableBody.innerHTML = '';
+                sorted.forEach(e => {console.log('e.parentelement', e.parentElement)
+                    tableBody.appendChild(e.parentElement)});
+            }  
+            
+            locCheck.addEventListener("click", function (e) {
+                if (this.checked) {
+                    for (let i=0; i<locs.length; i++) {
+                        locs[i].style.display="block";
+                    }
+                    locHeader.style.display="block";
+                    SortData();
+                } else {
+                    for (let i=0; i<locs.length; i++) {
+                        locs[i].style.display="none";
+                    }
+                    locHeader.style.display="none";
+                };
+            })
+
+        </script>
         <!-- Pagination -->
         <div class="mt-4 flex justify-between items-center">
             <button id="prevPage" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Previous</button>
@@ -407,10 +451,10 @@
                         <span class="inline-block px-2 py-1 rounded-full text-xs font-bold ${getTagColor(opp.opportunityType)}">${opp.opportunityType}</span>
                     </td>
                     <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${opp.organization}</td>
-                    <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
+                    ${`<td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900 locData">
                         ${opp.location}
                         <span class="${distanceClass} text-xs ml-2">(${formatDistance(distance)})</span>
-                    </td>
+                    </td>`}
                     <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${opp.datetime.split(" ")[0]}</td>
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">
                         ${opp.tags.map(tag => `<span class="inline-block px-2 py-1 rounded-full text-xs font-semibold mr-1 mb-1 ${getTagColor(tag)}">${tag}</span>`).join('')}
