@@ -121,8 +121,7 @@
                 var locsArray = Array.from(locs);
                 let sorted = locsArray.sort(comparator);
                 tableBody.innerHTML = '';
-                sorted.forEach(e => {console.log('e.parentelement', e.parentElement)
-                    tableBody.appendChild(e.parentElement)});
+                sorted.forEach(e => tableBody.appendChild(e.parentElement));
             }  
             
             locCheck.addEventListener("click", function (e) {
