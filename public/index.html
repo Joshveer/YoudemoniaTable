@@ -88,7 +88,7 @@
                         <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Opportunity Name</th>
                         <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Opportunity Type</th> <!-- Moved Opportunity Type here -->
                         <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Organization</th>
-                        <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider locHeader">Location
+                        <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider locHeader" style="display: none">Location
                           </th>
                         <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Date</th>
                         <th class="px-4 py-3 text-center text-xs font-bold text-white uppercase tracking-wider">Tags</th>
@@ -451,7 +451,7 @@
                         <span class="inline-block px-2 py-1 rounded-full text-xs font-bold ${getTagColor(opp.opportunityType)}">${opp.opportunityType}</span>
                     </td>
                     <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${opp.organization}</td>
-                    ${`<td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900 locData">
+                    ${`<td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900 locData" style="display: none">
                         ${opp.location}
                         <span class="${distanceClass} text-xs ml-2">(${formatDistance(distance)})</span>
                     </td>`}
