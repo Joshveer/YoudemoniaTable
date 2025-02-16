@@ -52,7 +52,7 @@
                         <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="High School" class="ageGroupCheckbox mr-2">High School</label>
                         <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="College" class="ageGroupCheckbox mr-2">College</label>
                         <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="18+" class="ageGroupCheckbox mr-2">18+ Only</label>
-                        <label class="block px-3 py-2 text-xs font-bold"><input type="checkbox" value="All Ages" class="ageGroupCheckbox mr-2">All Ages</label>
+                        <label class="block px-3 py-2 text-xs font-bold"><input id = "AllAges" type="checkbox" value="All Ages" class="ageGroupCheckbox mr-2">All Ages</label>
                     </div>
                 </div>
 
@@ -489,9 +489,11 @@
             const selectedAgeGroups = Array.from(document.querySelectorAll('.ageGroupCheckbox:checked')).map(cb => cb.value);
             const selectedOpportunityTypes = Array.from(document.querySelectorAll('.opportunityTypeCheckbox:checked')).map(cb => cb.value);
 
+            isAllAge = document.getElementById('AllAges').checked;
+
             filteredOpportunities = opportunities.filter(opp =>
                 (selectedIndustries.length === 0 || selectedIndustries.includes(opp.industry)) &&
-                (selectedAgeGroups.length === 0 || selectedAgeGroups.includes(opp.ageGroup)) &&
+                (selectedAgeGroups.length === 0 || selectedAgeGroups.includes(opp.ageGroup) || isAllAge) &&
                 (selectedOpportunityTypes.length === 0 || selectedOpportunityTypes.includes(opp.opportunityType))
             );
             currentPage = 1;
