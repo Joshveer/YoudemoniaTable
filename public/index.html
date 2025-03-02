@@ -70,13 +70,16 @@
 
         <!-- Buttons for all opportunities, favorites, and export favorites -->
         <div class="flex justify-center items-center space-x-8 mb-8">
-            <button id="allOpportunities" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">All Opportunities</button>
+            <button id="allOpportunities" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Show All Opportunities</button>
             <button id="favorites" class="bg-purple-700 text-white font-bold px-4 py-2 rounded-full text-sm">Favorites</button>
             <button id="exportFavorites" class="bg-red-700 text-white font-bold px-4 py-2 rounded-full text-sm">Export Favorites</button>
-            <div style="display: flex; align-items: center; justify-content: center;">Enable Location Match<label class="switch" style="margin-left: 10px">
+            <div style="display: flex; align-items: center; justify-content: center;"><p>Enable Distance Display</p>
+                <!--<label class="switch" style="margin-left: 10px">
+                    <input type="checkbox" id="locationChecker">
+                    <span class="slider round"></span>
+                </label>-->
                 <input type="checkbox" id="locationChecker">
-                <span class="slider round"></span>
-              </label></div>
+            </div>
         </div>
 
         <!-- Spreadsheet table -->
@@ -127,15 +130,13 @@
             locCheck.addEventListener("click", function (e) {
                 if (this.checked) {
                     for (let i=0; i<locs.length; i++) {
-                        locs[i].style.display="block";
+                        locs[i].style.display="unset";
                     }
-                    locHeader.style.display="block";
                     SortData();
                 } else {
                     for (let i=0; i<locs.length; i++) {
                         locs[i].style.display="none";
                     }
-                    locHeader.style.display="none";
                 };
             })
 
@@ -440,6 +441,7 @@
                       'text-gray-400';
                 
                 const row = document.createElement('tr');
+                let locCheck = document.getElementById("locationChecker");
                 row.innerHTML = `
                     <td class="px-4 py-4 whitespace-nowrap text-sm font-bold">
                         <span class="heartIcon cursor-pointer text-xl" onclick="toggleFavorite(this, '${opp.name}')">
@@ -451,9 +453,9 @@
                         <span class="inline-block px-2 py-1 rounded-full text-xs font-bold ${getTagColor(opp.opportunityType)}">${opp.opportunityType}</span>
                     </td>
                     <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${opp.organization}</td>
-                    ${`<td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900 locData">
+                    ${`<td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
                         ${opp.location}
-                        <span class="${distanceClass} text-xs ml-2">(${formatDistance(distance)})</span>
+                        <span class="${distanceClass} text-xs ml-2 locData" style="display: }" >(${formatDistance(distance)})</span>
                     </td>`}
                     <td class="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${opp.datetime.split(" ")[0]}</td>
                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">
